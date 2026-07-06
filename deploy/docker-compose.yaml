@@ -1,0 +1,16 @@
+volumes:
+  db-dev:
+
+services:
+  database:
+    image: mysql
+    restart: on-failure
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME:-db}
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD:-password!}
+      MYSQL_USER: ${USER:-user}
+      MYSQL_PASSWORD: ${PASSWORD:-password}
+    volumes:
+      - db-dev:/var/lib/mysql
