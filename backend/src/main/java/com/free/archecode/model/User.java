@@ -1,7 +1,6 @@
 package com.free.archecode.model;
 
 import jakarta.persistence.*;
-import com.free.archecode.model.Role;
 
 @Entity
 @Table(name = "users")
