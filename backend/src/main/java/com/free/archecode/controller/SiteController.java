@@ -1,9 +1,8 @@
-package com.free.archecode;
+package com.free.archecode.controller;
 
+import com.free.archecode.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tools.jackson.databind.util.JSONPObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +16,8 @@ public class SiteController {
 //        return new HashMap<>().put("message", "hello");
         HashMap<String, String> map = new HashMap<>();
         map.put("message", "Hello World");
+        User newUser = new User();
+
         return map;
     }
 }

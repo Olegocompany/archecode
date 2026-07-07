@@ -1,0 +1,1 @@
+insert into roles (name) VALUES ('admin'), ('manager'), ('worker')
