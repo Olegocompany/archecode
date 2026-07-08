@@ -1,9 +1,7 @@
-package com.free.archecode.service.user;
+package com.free.archecode.app.user;
 
-import com.free.archecode.model.Role;
-import com.free.archecode.model.User;
-import com.free.archecode.repository.role.RoleRepository;
-import com.free.archecode.repository.user.UserRepository;
+import com.free.archecode.app.role.Role;
+import com.free.archecode.app.role.RoleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

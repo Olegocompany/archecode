@@ -1,6 +1,5 @@
-package com.free.archecode.repository.user;
+package com.free.archecode.app.user;
 
-import com.free.archecode.model.User;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;

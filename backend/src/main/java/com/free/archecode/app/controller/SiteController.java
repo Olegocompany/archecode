@@ -1,6 +1,6 @@
-package com.free.archecode.controller;
+package com.free.archecode.app.controller;
 
-import com.free.archecode.model.User;
+import com.free.archecode.app.user.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

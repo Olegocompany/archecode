@@ -1,4 +1,4 @@
-package com.free.archecode.dto.user;
+package com.free.archecode.app.user.dto;
 
 public class UserResponse {
     private Long id;

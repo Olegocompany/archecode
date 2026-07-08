@@ -1,6 +1,6 @@
-package com.free.archecode.model;
+package com.free.archecode.app.role;
 
-import jakarta.persistence.*;
+import com.free.archecode.app.user.User;import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -16,4 +16,16 @@ public class Role {
 
     @OneToMany(mappedBy = "role") // это поле, которое в модели, а не в самой бд
     private Set<User> users;
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

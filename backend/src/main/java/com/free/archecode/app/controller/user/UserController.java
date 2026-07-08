@@ -1,9 +1,9 @@
-package com.free.archecode.controller.user;
+package com.free.archecode.app.controller.user;
 
-import com.free.archecode.dto.user.UserRegistrationRequest;
-import com.free.archecode.dto.user.UserResponse;
-import com.free.archecode.model.User;
-import com.free.archecode.service.user.UserService;
+import com.free.archecode.app.user.dto.UserRegistrationRequest;
+import com.free.archecode.app.user.dto.UserResponse;
+import com.free.archecode.app.user.User;
+import com.free.archecode.app.user.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

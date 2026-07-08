@@ -1,4 +1,4 @@
-package com.free.archecode.dto.user;
+package com.free.archecode.app.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -1,5 +1,6 @@
-package com.free.archecode.model;
+package com.free.archecode.app.user;
 
+import com.free.archecode.app.role.Role;
 import jakarta.persistence.*;
 
 @Entity
@@ -62,5 +63,12 @@ public class User {
         return surname;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
 }
