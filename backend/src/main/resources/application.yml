@@ -1,0 +1,12 @@
+debug: true
+spring:
+    application:
+        name: archecode
+    flyway:
+        enabled: true
+    jpa:
+        generate-ddl: false
+        hibernate:
+            ddl-auto: validate
+    main:
+        allow-bean-definition-overriding: true
