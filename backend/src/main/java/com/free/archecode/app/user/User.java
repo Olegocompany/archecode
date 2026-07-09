@@ -63,8 +63,8 @@ public class User {
         return surname;
     }
 
-    public Role getRole() {
-        return role;
+    public String getRole() {
+        return role.getName();
     }
 
     public String getPassword() {

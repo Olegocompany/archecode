@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.Collections;
 
+
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
 
     private final User user;
@@ -19,7 +20,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(
-                new SimpleGrantedAuthority("ROLE_" + user.getRole().getName().toUpperCase())
+                new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase())
         );
     }
 

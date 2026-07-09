@@ -1,34 +1,41 @@
 package com.free.archecode.app.controller.user;
 
-import com.free.archecode.app.user.dto.UserRegistrationRequest;
-import com.free.archecode.app.user.dto.UserResponse;
+import com.free.archecode.app.role.RoleDto;
 import com.free.archecode.app.user.User;
-import com.free.archecode.app.user.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.free.archecode.app.user.UserMapper;
+import com.free.archecode.app.user.UserRepository;
+import com.free.archecode.app.user.dto.UserDto;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@AllArgsConstructor // используя Lombok, самостоятельно сделает конструктор (отыграет autowired) и подгрузит зависимости в поля (dependency injection) (в данном случае репозиторий и сервис)
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    @GetMapping("")
+    public List<UserDto> getUsers() {
+        return userRepository.findAll().stream()
+                .map(userMapper::toDto) // user -> userMapper.toDto(user)
+                .toList();
     }
 
-    @PostMapping("/register")
-    public UserResponse registerUser(@RequestBody UserRegistrationRequest request) {
-        System.out.println("registerUser");
-        User user = userService.createUserWithWorkerRole(
-                request.getName(),
-                request.getSurname(),
-                request.getEmail(),
-                request.getPassword()
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+        var user = userRepository.findById(id).orElse(null);
+        if (user == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(
+                userMapper.toDto(user)
         );
-
-        return new UserResponse(user.getId(), user.getName(), user.getSurname(), user.getEmail());
     }
+
+
 }
