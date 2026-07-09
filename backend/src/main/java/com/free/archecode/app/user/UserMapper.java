@@ -1,7 +1,9 @@
 package com.free.archecode.app.user;
 
+import com.free.archecode.app.user.dto.RegisterUserRequest;
 import com.free.archecode.app.user.dto.UserDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /*
 Интерфейс, с помощью которого Mapper самостоятельно закинет в DTO то, что нужно
@@ -9,4 +11,8 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserDto toDto(User user);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "role", ignore = true) // игнорируем эту автоподставку, потом в сервисе сами расставим
+    User toEntity(RegisterUserRequest userDto);
 }

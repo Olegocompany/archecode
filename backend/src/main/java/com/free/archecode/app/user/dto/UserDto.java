@@ -1,6 +1,7 @@
 package com.free.archecode.app.user.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.free.archecode.app.role.RoleDto;

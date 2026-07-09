@@ -1,11 +1,15 @@
 package com.free.archecode.app.user;
 
 import com.free.archecode.app.role.Role;
+import com.free.archecode.app.role.RoleRepository;
 import jakarta.persistence.*;
+import lombok.ToString;
 
 @Entity
 @Table(name = "users")
+@ToString(exclude = "role")
 public class User {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Identity указываем, чтобы работало как автоинкремент
