@@ -1,3 +1,4 @@
 cd frontend
-echo "=== PRE-COMMIT HOOK TRIGGERED ==="
+echo "<~~~~~~ PRE-COMMIT LINTING VIA HUSKY ~~~~~~>"
 npx lint-staged
+echo "<~~~~~~ PRE-COMMIT LINTING DONE ~~~~~~>"
