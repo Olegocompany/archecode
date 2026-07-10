@@ -1,9 +1,11 @@
 package com.free.archecode.app.user;
 
 import com.free.archecode.app.user.dto.RegisterUserRequest;
+import com.free.archecode.app.user.dto.UpdateUserRequest;
 import com.free.archecode.app.user.dto.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 /*
 Интерфейс, с помощью которого Mapper самостоятельно закинет в DTO то, что нужно
@@ -15,4 +17,6 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "role", ignore = true) // игнорируем эту автоподставку, потом в сервисе сами расставим
     User toEntity(RegisterUserRequest userDto);
+
+    void update(UpdateUserRequest updateUserRequest, @MappingTarget User user); // для обновы. прием с updateUserRequest и указание кого обновлять
 }

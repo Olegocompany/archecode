@@ -10,7 +10,7 @@ public interface RoleRepository extends Repository<Role, Long> {
 
     Role save(Role role);
 
-    Optional<Role> findById(Long id);
+    Role findById(Long id);
 
     Iterable<Role> findAll();
 
