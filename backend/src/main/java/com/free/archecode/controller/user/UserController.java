@@ -1,25 +1,15 @@
-package com.free.archecode.app.controller.user;
+package com.free.archecode.controller.user;
 
-import com.free.archecode.app.role.RoleDto;
-import com.free.archecode.app.role.RoleRepository;
-import com.free.archecode.app.user.User;
-import com.free.archecode.app.user.UserMapper;
-import com.free.archecode.app.user.UserRepository;
-import com.free.archecode.app.user.dto.RegisterUserRequest;
-import com.free.archecode.app.user.dto.UpdateUserRequest;
-import com.free.archecode.app.user.dto.UserDto;
+import com.free.archecode.role.RoleRepository;
+import com.free.archecode.user.UserMapper;
+import com.free.archecode.user.UserRepository;
+import com.free.archecode.user.dto.UpdateUserRequest;
+import com.free.archecode.user.dto.UserDto;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/users")

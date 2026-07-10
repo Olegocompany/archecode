@@ -1,23 +1,17 @@
-package com.free.archecode.app.controller.user;
+package com.free.archecode.controller.user;
 
-import com.free.archecode.app.role.RoleRepository;
-import com.free.archecode.app.user.User;
-import com.free.archecode.app.user.UserMapper;
-import com.free.archecode.app.user.UserRepository;
-import com.free.archecode.app.user.dto.RegisterUserRequest;
-import com.free.archecode.app.user.dto.UserDto;
+import com.free.archecode.role.RoleRepository;
+import com.free.archecode.user.UserMapper;
+import com.free.archecode.user.UserRepository;
+import com.free.archecode.user.dto.RegisterUserRequest;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/auth")

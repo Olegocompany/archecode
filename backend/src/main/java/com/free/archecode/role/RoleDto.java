@@ -1,6 +1,5 @@
-package com.free.archecode.app.role;
+package com.free.archecode.role;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

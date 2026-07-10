@@ -1,4 +1,4 @@
-package com.free.archecode.app.user;
+package com.free.archecode.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

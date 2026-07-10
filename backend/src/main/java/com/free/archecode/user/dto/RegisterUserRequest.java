@@ -1,7 +1,6 @@
-package com.free.archecode.app.user.dto;
+package com.free.archecode.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.free.archecode.app.role.Role;
 import lombok.Data;
 
 @Data

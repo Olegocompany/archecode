@@ -1,7 +1,6 @@
-package com.free.archecode.app.user.service;
+package com.free.archecode.user.service;
 
-import com.free.archecode.app.user.User;
-import com.free.archecode.app.user.UserRepository;
+import com.free.archecode.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

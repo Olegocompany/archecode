@@ -1,7 +1,6 @@
-package com.free.archecode.app.user;
+package com.free.archecode.user;
 
-import com.free.archecode.app.role.Role;
-import com.free.archecode.app.role.RoleRepository;
+import com.free.archecode.role.Role;
 import jakarta.persistence.*;
 import lombok.ToString;
 

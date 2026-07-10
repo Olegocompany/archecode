@@ -1,6 +1,6 @@
-package com.free.archecode.app.role;
+package com.free.archecode.role;
 
-import com.free.archecode.app.user.User;import jakarta.persistence.*;
+import com.free.archecode.user.User;import jakarta.persistence.*;
 
 import java.util.Set;
 

@@ -1,8 +1,6 @@
-package com.free.archecode.app.role;
+package com.free.archecode.role;
 
 import org.springframework.data.repository.Repository;
-
-import java.util.Optional;
 
 public interface RoleRepository extends Repository<Role, Long> {
 

@@ -1,4 +1,4 @@
-package com.free.archecode.app.user;
+package com.free.archecode.user;
 
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;

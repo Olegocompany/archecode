@@ -1,18 +1,16 @@
-package com.free.archecode.app.user.service;
+package com.free.archecode.user.service;
 
 /*
 Конкретно этот - будет вызываться DaoAuthProvider-ом для всяческих проверок и выгрузок пользователя
  */
 
-import com.free.archecode.app.role.RoleRepository;
-import com.free.archecode.app.user.User;
-import com.free.archecode.app.user.UserDetails;
-import com.free.archecode.app.user.UserRepository;
+import com.free.archecode.role.RoleRepository;
+import com.free.archecode.user.User;
+import com.free.archecode.user.UserDetails;
+import com.free.archecode.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
