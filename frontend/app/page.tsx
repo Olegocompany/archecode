@@ -14,7 +14,7 @@ export default function Home() {
           priority
         />
           <div className="w-140 h-30">
-              <Input type={'text'} placeholder={'Логин'} error />
+              <Input type={'text'} placeholder={'Логин'} error={'олег'} />
           </div>
 
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
