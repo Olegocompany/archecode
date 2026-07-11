@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login", "/auth/register", "/public/**").permitAll()
                         .anyRequest().authenticated()
-                ) // разрешить все, чтобы доходили до контроллеров
+                ) // разрешить какие публичные (для всех) и для входа с регистрацией
 
         // Переопределение формата выдаваемых ошибок защиты
                 .exceptionHandling(exceptions -> exceptions

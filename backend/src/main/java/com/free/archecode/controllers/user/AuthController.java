@@ -6,7 +6,7 @@ import com.free.archecode.user.UserMapper;
 import com.free.archecode.user.UserRepository;
 import com.free.archecode.user.dto.auth.LoginUserRequest;
 import com.free.archecode.user.dto.auth.RegisterUserRequest;
-import lombok.AllArgsConstructor;
+import jakarta.validation.Valid;import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,14 +31,19 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> createUser(@RequestBody RegisterUserRequest data) throws Exception {
-        var user = userMapper.toEntity(data);
-        if (data.getRole() == null) {
-            throw new BadRequestException("invalid role");
+    public ResponseEntity<?> createUser(
+            @RequestBody(required = true) @Valid RegisterUserRequest data
+    ) throws Exception {
+        System.out.println("createUser");
+        String roleName = data.getRole_name();
+        if (!(Set.of("worker", "manager").contains(roleName))) {
+            return ResponseEntity.badRequest().body(Map.of("message", "available roles: worker, manager"));
         }
-        user.setRole(roleRepository.findById(data.getRole()));
+
+        var user = userMapper.toEntity(data);
+        user.setRole(roleRepository.findByName(roleName));
         user.setPassword(passwordEncoder.encode(data.getPassword()));
-        userRepository.save(user);
+//        userRepository.save(user);
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 

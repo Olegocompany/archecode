@@ -59,7 +59,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authDetails);
                 }
             }
-        } catch (MalformedJwtException | SignatureException _) {/* ничего не делать - токен не валиден */}
+        } catch (MalformedJwtException | SignatureException e ) {/* ничего не делать - токен не валиден */}
         try {
             filterChain.doFilter(request, response);
         } catch (IOException|ServletException e) {
