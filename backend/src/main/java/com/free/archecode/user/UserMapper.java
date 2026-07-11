@@ -1,5 +1,6 @@
 package com.free.archecode.user;
 
+import com.free.archecode.user.dto.auth.AuthResponse;
 import com.free.archecode.user.dto.auth.RegisterUserRequest;
 import com.free.archecode.user.dto.UpdateUserRequest;
 import com.free.archecode.user.dto.UserDto;
@@ -19,4 +20,6 @@ public interface UserMapper {
     User toEntity(RegisterUserRequest userDto);
 
     void update(UpdateUserRequest updateUserRequest, @MappingTarget User user); // для обновы. прием с updateUserRequest и указание кого обновлять
+
+    AuthResponse toAuthResponse(String token);
 }
