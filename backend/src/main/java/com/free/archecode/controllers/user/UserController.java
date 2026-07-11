@@ -1,4 +1,4 @@
-package com.free.archecode.controller.user;
+package com.free.archecode.controllers.user;
 
 import com.free.archecode.role.RoleRepository;
 import com.free.archecode.user.UserMapper;

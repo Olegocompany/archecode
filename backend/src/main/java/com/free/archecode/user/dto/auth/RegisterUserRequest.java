@@ -1,4 +1,4 @@
-package com.free.archecode.user.dto;
+package com.free.archecode.user.dto.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

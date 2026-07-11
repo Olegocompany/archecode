@@ -1,5 +1,6 @@
 package com.free.archecode.config.security;
 
+import com.free.archecode.utils.jwt.JwtFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
+    private final JwtFilter jwtFilter;
 
     /*
     Перенастройка Spring Security на "api" режим: вывод json ответов, отключение его сессий
@@ -31,7 +34,10 @@ public class SecurityConfig {
         // Отключаем CSRF
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // разрешить все, чтобы доходили до контроллеров
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/login", "/auth/register", "/public/**").permitAll()
+                        .anyRequest().authenticated()
+                ) // разрешить все, чтобы доходили до контроллеров
 
         // Переопределение формата выдаваемых ошибок защиты
                 .exceptionHandling(exceptions -> exceptions
@@ -49,7 +55,13 @@ public class SecurityConfig {
                     // No sessions
                 .sessionManagement(sessionManagement ->  sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+                )
+                /*
+                по идее логика такова:
+                сначала запрос идет в JwtFilter, там идет проверка JWT токена и в случае аутентифицируется.
+                при аутентификации создается объект Authentication (то есть аутентифицирован)
+                 */
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class); // фильтр перед проверкой
         return http.build();
     }
 

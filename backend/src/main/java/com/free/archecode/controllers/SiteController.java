@@ -1,4 +1,4 @@
-package com.free.archecode.controller;
+package com.free.archecode.controllers;
 
 import com.free.archecode.user.User;
 import org.springframework.web.bind.annotation.GetMapping;

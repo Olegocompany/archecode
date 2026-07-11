@@ -1,9 +1,10 @@
-package com.free.archecode.controller.user;
+package com.free.archecode.controllers.user;
 
 import com.free.archecode.role.RoleRepository;
 import com.free.archecode.user.UserMapper;
 import com.free.archecode.user.UserRepository;
-import com.free.archecode.user.dto.RegisterUserRequest;
+import com.free.archecode.user.dto.auth.LoginUserRequest;
+import com.free.archecode.user.dto.auth.RegisterUserRequest;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +35,10 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(data.getPassword()));
         userRepository.save(user);
         return ResponseEntity.ok(userMapper.toDto(user));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginUserRequest data) throws Exception {
+        return ResponseEntity.ok("мне лень");
     }
 }

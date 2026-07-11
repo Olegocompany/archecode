@@ -1,5 +1,6 @@
 package com.free.archecode.user;
 
+import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,16 +9,17 @@ import java.util.Collection;
 import java.util.Collections;
 
 
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
+public class ImpUserDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
 
     private final User user;
 
 
-    public UserDetails(User user) {
+    public ImpUserDetails(User user) {
         this.user = user;
     }
 
     @Override
+    @NullMarked
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(
                 new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase())
@@ -30,6 +32,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
     }
 
     @Override
+    @NullMarked
     public String getUsername() {
         return user.getEmail();
     }
