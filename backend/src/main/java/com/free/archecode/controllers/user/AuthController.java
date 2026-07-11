@@ -1,6 +1,7 @@
 package com.free.archecode.controllers.user;
 
 import com.free.archecode.role.RoleRepository;
+import com.free.archecode.user.User;
 import com.free.archecode.user.UserMapper;
 import com.free.archecode.user.UserRepository;
 import com.free.archecode.user.dto.auth.LoginUserRequest;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -39,6 +43,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUserRequest data) throws Exception {
-        return ResponseEntity.ok("мне лень");
+        User user = userRepository.findByEmail(data.getEmail()).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(403).build();
+        }
+
+        if (!passwordEncoder.matches(data.getPassword(), user.getPassword())) {
+            return ResponseEntity.status(403).build();
+        }
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
 }
