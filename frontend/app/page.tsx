@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Input from "@/app/shared/input";
+import { AppLink } from "@/app/shared/link";
 
 export default function Home() {
   return (
@@ -13,9 +14,10 @@ export default function Home() {
           height={20}
           priority
         />
-          <div className="w-140 h-30">
-              <Input type={'text'} placeholder={'Логин'} error={'олег'} />
-          </div>
+        <div className="w-140 h-30">
+          <Input type={"text"} placeholder={"Логин"} error={"олег"} />
+          <AppLink to={"/"}>Сюда</AppLink>
+        </div>
 
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
