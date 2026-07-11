@@ -1,3 +1,4 @@
+#!/bin/sh
 cd frontend
 echo "<~~~~~~ PRE-COMMIT LINTING VIA HUSKY ~~~~~~>"
 npx lint-staged
