@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
-
 :root {
-    --main: #FAFAFA;
-    --primary: #484848;
-    --secondary: #242424;
-    --accent-base: #56AE63;
-    --accent-light: #54CA58;
-    --auxiliary: #63EDDC;
-    --input-outline: #323232;
-    --input-placeholder: #666666;
-    --placeholder-hover: #888888;
-    --placeholder-active: #AAAAAA;
-    --error: #821616;
-
+  --main: #fafafa;
+  --primary: #484848;
+  --secondary: #242424;
+  --accent-base: #56ae63;
+  --accent-light: #54ca58;
+  --accent-lighter: #55f05b;
+  --auxiliary: #63eddc;
+  --input-outline: #323232;
+  --input-placeholder: #666666;
+  --placeholder-hover: #888888;
+  --placeholder-active: #aaaaaa;
+  --error: #821616;
 }
 
 @theme inline {
-    --color-main: var(--main);
-    --color-primary: var(--primary);
-    --color-secondary: var(--secondary);
-    --color-accent-base: var(--accent-base);
-    --color-accent-light: var(--accent-light);
-    --color-auxiliary: var(--auxiliary);
-    --color-input-outline: var(--input-outline);
-    --color-input-placeholder: var(--input-placeholder);
-    --color-placeholder-hover: var(--placeholder-hover);
-    --color-placeholder-active: var(--placeholder-active);
-    --color-error: var(--error);
+  --color-main: var(--main);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent-base: var(--accent-base);
+  --color-accent-light: var(--accent-light);
+  --color-accent-lighter: var(--accent-lighter);
+  --color-auxiliary: var(--auxiliary);
+  --color-input-outline: var(--input-outline);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-placeholder-hover: var(--placeholder-hover);
+  --color-placeholder-active: var(--placeholder-active);
+  --color-error: var(--error);
 }
