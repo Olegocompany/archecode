@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ArchecodeApplication {
+public class ArcheCodeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ArchecodeApplication.class, args);
+        SpringApplication.run(ArcheCodeApplication.class, args);
     }
 
 }

@@ -1,0 +1,31 @@
+package com.free.archecode.role;
+
+import com.free.archecode.user.User;import jakarta.persistence.*;
+
+import java.util.Set;
+
+@Entity
+@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
+public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "role") // это поле, которое в модели, а не в самой бд
+    private Set<User> users;
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+}
