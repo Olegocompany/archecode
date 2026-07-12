@@ -3,6 +3,8 @@
 :root {
   --main: #fafafa;
   --primary: #484848;
+  --primary-light: #525252;
+  --primary-dark: #404040;
   --secondary: #242424;
   --accent-base: #56ae63;
   --accent-light: #54ca58;
@@ -18,6 +20,8 @@
 @theme inline {
   --color-main: var(--main);
   --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
   --color-secondary: var(--secondary);
   --color-accent-base: var(--accent-base);
   --color-accent-light: var(--accent-light);
