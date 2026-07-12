@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString(exclude = "role")
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Identity указываем, чтобы работало как автоинкремент
     private Long id;
@@ -23,7 +22,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
+    
     // setters
     public void setRole(Role role) {
         this.role = role;

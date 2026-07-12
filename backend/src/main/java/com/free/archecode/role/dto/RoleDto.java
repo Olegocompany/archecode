@@ -1,4 +1,4 @@
-package com.free.archecode.role;
+package com.free.archecode.role.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

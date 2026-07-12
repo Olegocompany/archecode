@@ -1,5 +1,6 @@
-package com.free.archecode.user;
+package com.free.archecode.shared.config.security.user;
 
+import com.free.archecode.user.User;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,12 +10,11 @@ import java.util.Collection;
 import java.util.Collections;
 
 
-public class ImpUserDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
+public class ImpUserAuthDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
 
     private final User user;
 
-
-    public ImpUserDetails(User user) {
+    public ImpUserAuthDetails(User user) {
         this.user = user;
     }
 
