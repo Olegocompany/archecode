@@ -1,4 +1,4 @@
-package com.free.archecode.user.security;
+package com.free.archecode.shared.config.security.user;
 
 /*
 Конкретно этот - будет вызываться DaoAuthProvider-ом для всяческих проверок и выгрузок пользователя
@@ -8,9 +8,9 @@ import com.free.archecode.user.User;
 import com.free.archecode.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.NullMarked;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 @SuppressWarnings("RedundantThrows")
 @Service

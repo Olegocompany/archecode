@@ -1,4 +1,4 @@
-package com.free.archecode.user.security;
+package com.free.archecode.shared.config.security.user;
 
 import com.free.archecode.user.User;
 import org.jspecify.annotations.NullMarked;

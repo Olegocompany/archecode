@@ -1,6 +1,6 @@
 package com.free.archecode.shared.config.security;
 
-import com.free.archecode.shared.security.jwt.JwtFilter;
+import com.free.archecode.shared.config.security.jwt.JwtFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +25,7 @@ public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
+    private final ContentTypeFilter contentTypeFilter;
 
     /*
     Перенастройка Spring Security на "api" режим: вывод json ответов, отключение его сессий
@@ -61,7 +62,9 @@ public class SecurityConfig {
                 сначала запрос идет в JwtFilter, там идет проверка JWT токена и в случае аутентифицируется.
                 при аутентификации создается объект Authentication (то есть аутентифицирован)
                  */
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class); // фильтр перед проверкой
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // фильтр перед проверкой
+                .addFilterBefore(contentTypeFilter, JwtFilter.class); // проверка что запрос только про API
+
         return http.build();
     }
 
