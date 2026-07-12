@@ -1,4 +1,4 @@
-debug: true
+debug: ${DEBUG_ENABLED:false}
 spring:
     application:
         name: archecode

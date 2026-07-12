@@ -22,7 +22,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
+    
     // setters
     public void setRole(Role role) {
         this.role = role;
