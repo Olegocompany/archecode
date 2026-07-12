@@ -1,14 +1,13 @@
-package com.free.archecode.controllers.user;
+package com.free.archecode.controller.user;
 
 import com.free.archecode.role.RoleRepository;
-import com.free.archecode.user.ImpUserDetails;import com.free.archecode.user.User;
-import com.free.archecode.user.UserMapper;
+import com.free.archecode.user.service.auth.ImpUserAuthDetails;import com.free.archecode.user.User;
+import com.free.archecode.user.dto.UserMapper;
 import com.free.archecode.user.UserRepository;
 import com.free.archecode.user.dto.auth.LoginUserRequest;
 import com.free.archecode.user.dto.auth.RegisterUserRequest;
-import com.free.archecode.utils.jwt.JwtService;import jakarta.validation.Valid;
+import com.free.archecode.shared.security.jwt.JwtService;import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
@@ -36,7 +33,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> createUser(
             @RequestBody(required = true) @Valid RegisterUserRequest data
-    ) throws Exception {
+    ) {
         System.out.println("createUser");
         String roleName = data.getRole_name();
         if (!(Set.of("worker", "manager").contains(roleName))) {
@@ -51,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginUserRequest data) throws Exception {
+    public ResponseEntity<?> login(@RequestBody LoginUserRequest data) {
         User user = userRepository.findByEmail(data.getEmail()).orElse(null);
         if (user == null) {
             return ResponseEntity.status(403).build();
@@ -64,6 +61,6 @@ public class AuthController {
     }
 
     private String generateToken(User user) {
-        return jwtService.generateToken(new ImpUserDetails(user));
+        return jwtService.generateToken(new ImpUserAuthDetails(user));
     }
 }

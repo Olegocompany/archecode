@@ -1,9 +1,8 @@
-package com.free.archecode.user;
+package com.free.archecode.user.dto;
 
+import com.free.archecode.user.User;
 import com.free.archecode.user.dto.auth.AuthResponse;
 import com.free.archecode.user.dto.auth.RegisterUserRequest;
-import com.free.archecode.user.dto.UpdateUserRequest;
-import com.free.archecode.user.dto.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

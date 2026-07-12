@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString(exclude = "role")
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Identity указываем, чтобы работало как автоинкремент
     private Long id;

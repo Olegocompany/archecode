@@ -1,4 +1,4 @@
-package com.free.archecode.config;
+package com.free.archecode.shared.config;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

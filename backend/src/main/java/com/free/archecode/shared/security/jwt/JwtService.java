@@ -1,7 +1,7 @@
-package com.free.archecode.utils.jwt;
+package com.free.archecode.shared.security.jwt;
 
 
-import com.free.archecode.user.ImpUserDetails;
+import com.free.archecode.user.service.auth.ImpUserAuthDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -22,7 +22,7 @@ public class JwtService {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    public String generateToken(ImpUserDetails userDetails) {
+    public String generateToken(ImpUserAuthDetails userDetails) {
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .claim("roles", userDetails.getAuthorities())

@@ -1,7 +1,7 @@
-package com.free.archecode.utils.jwt;
+package com.free.archecode.shared.security.jwt;
 
-import com.free.archecode.user.ImpUserDetails;
-import com.free.archecode.user.service.ImpUserDetailsService;
+import com.free.archecode.user.service.auth.ImpUserAuthDetails;
+import com.free.archecode.user.service.auth.ImpUserAuthDetailsService;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
@@ -23,7 +23,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     private JwtService jwtService;
-    private ImpUserDetailsService userDetailsService;
+    private ImpUserAuthDetailsService userDetailsService;
 
     @Override
     @NullMarked
@@ -43,7 +43,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String username = jwtService.extractUsername(token);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                ImpUserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                ImpUserAuthDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 if (jwtService.validateToken(token, userDetails)) {
                     /*

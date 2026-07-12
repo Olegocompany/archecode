@@ -1,4 +1,4 @@
-package com.free.archecode.config.database;
+package com.free.archecode.shared.config.database;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -1,15 +1,10 @@
-package com.free.archecode.controllers.user;
+package com.free.archecode.controller.user;
 
 import com.free.archecode.role.RoleRepository;
-import com.free.archecode.user.UserMapper;
+import com.free.archecode.user.dto.UserMapper;
 import com.free.archecode.user.UserRepository;
-import com.free.archecode.user.dto.UpdateUserRequest;
-import com.free.archecode.user.dto.UserDto;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
