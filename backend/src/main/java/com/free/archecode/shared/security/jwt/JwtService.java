@@ -1,7 +1,7 @@
 package com.free.archecode.shared.security.jwt;
 
 
-import com.free.archecode.user.service.auth.ImpUserAuthDetails;
+import com.free.archecode.user.security.ImpUserAuthDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

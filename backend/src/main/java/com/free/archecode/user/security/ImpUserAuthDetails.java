@@ -1,4 +1,4 @@
-package com.free.archecode.user.service.auth;
+package com.free.archecode.user.security;
 
 import com.free.archecode.user.User;
 import org.jspecify.annotations.NullMarked;
@@ -13,7 +13,6 @@ import java.util.Collections;
 public class ImpUserAuthDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
 
     private final User user;
-
 
     public ImpUserAuthDetails(User user) {
         this.user = user;

@@ -1,7 +1,7 @@
 package com.free.archecode.shared.security.jwt;
 
-import com.free.archecode.user.service.auth.ImpUserAuthDetails;
-import com.free.archecode.user.service.auth.ImpUserAuthDetailsService;
+import com.free.archecode.user.security.ImpUserAuthDetails;
+import com.free.archecode.user.security.ImpUserAuthDetailsService;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;

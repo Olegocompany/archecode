@@ -17,10 +17,6 @@ public class Role {
     @OneToMany(mappedBy = "role") // это поле, которое в модели, а не в самой бд
     private Set<User> users;
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
     public String getName() {
         return name;
     }

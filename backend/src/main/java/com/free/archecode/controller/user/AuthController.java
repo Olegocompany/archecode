@@ -1,7 +1,7 @@
 package com.free.archecode.controller.user;
 
 import com.free.archecode.role.RoleRepository;
-import com.free.archecode.user.service.auth.ImpUserAuthDetails;import com.free.archecode.user.User;
+import com.free.archecode.user.security.ImpUserAuthDetails;import com.free.archecode.user.User;
 import com.free.archecode.user.dto.UserMapper;
 import com.free.archecode.user.UserRepository;
 import com.free.archecode.user.dto.auth.LoginUserRequest;
@@ -32,11 +32,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(
-            @RequestBody(required = true) @Valid RegisterUserRequest data
+            @RequestBody @Valid RegisterUserRequest data
     ) {
         System.out.println("createUser");
         String roleName = data.getRole_name();
-        if (!(Set.of("worker", "manager").contains(roleName))) {
+        if (!(Set.of("user", "worker").contains(roleName))) {
             return ResponseEntity.badRequest().body(Map.of("message", "available roles: worker, manager"));
         }
 
@@ -48,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginUserRequest data) {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginUserRequest data) {
         User user = userRepository.findByEmail(data.getEmail()).orElse(null);
         if (user == null) {
             return ResponseEntity.status(403).build();
