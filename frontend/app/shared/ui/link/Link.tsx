@@ -5,7 +5,7 @@ interface LinkProps {
   children: ReactNode;
 }
 
-function AppLink({ to, children }: LinkProps) {
+function Link({ to, children }: LinkProps) {
   return (
     <a
       className="text-accent-light cursor-pointer [text-shadow:0_0_6px_rgba(0,185,6,0.75)]
@@ -18,4 +18,4 @@ function AppLink({ to, children }: LinkProps) {
   );
 }
 
-export default AppLink;
+export default Link;
