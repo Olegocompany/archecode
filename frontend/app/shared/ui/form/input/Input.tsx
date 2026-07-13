@@ -16,9 +16,7 @@ function Input({ disabled, error, placeholder, type = "text" }: InputProps) {
         placeholder={placeholder}
         type={type}
       />
-      {typeof error === "string" && (
-        <p className="text-sm text-error mt-0.75">{error}</p>
-      )}
+      {!!error && <p className="text-sm text-error mt-0.75">{error}</p>}
     </label>
   );
 }
