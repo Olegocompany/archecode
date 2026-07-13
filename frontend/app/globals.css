@@ -8,6 +8,7 @@
   --accent-base: #56ae63;
   --accent-light: #54ca58;
   --accent-lighter: #55f05b;
+  --accent-dark: #329735;
   --auxiliary: #63eddc;
   --input-outline: #323232;
   --input-placeholder: #666666;
@@ -24,6 +25,7 @@
   --color-accent-base: var(--accent-base);
   --color-accent-light: var(--accent-light);
   --color-accent-lighter: var(--accent-lighter);
+  --color-accent-dark: var(--accent-dark);
   --color-auxiliary: var(--auxiliary);
   --color-input-outline: var(--input-outline);
   --color-input-placeholder: var(--input-placeholder);
