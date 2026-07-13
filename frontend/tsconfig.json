@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@icons/*": ["./public/icons"]
+      "@shared-ui": ["./app/shared/ui/index"]
     }
   },
   "include": [

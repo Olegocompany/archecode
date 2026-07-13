@@ -1,0 +1,23 @@
+debug: ${DEBUG_ENABLED:false}
+spring:
+    application:
+        name: archecode
+    flyway:
+        enabled: true
+    jpa:
+        generate-ddl: false
+        hibernate:
+            ddl-auto: validate
+    main:
+        allow-bean-definition-overriding: true
+    datasource:
+      url: ${DATABASE_URL}
+      username: ${DB_USER}
+      password: ${DB_PASSWORD}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+jwt:
+    secret: ${JWT_SECRET}
+    expiration: ${JWT_EXPIRATION:86400000}
