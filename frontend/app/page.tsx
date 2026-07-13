@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { AppLink, Input } from "@shared-ui";
 
 export default function Home() {
   return (
