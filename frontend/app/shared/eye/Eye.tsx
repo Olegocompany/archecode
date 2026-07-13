@@ -1,7 +1,7 @@
 import { CloseEye, OpenEye } from "@/app/shared/svg";
 
 interface EyeProps {
-  state: boolean;
+  state?: boolean;
 }
 
 function Eye({ state = true }: EyeProps) {
