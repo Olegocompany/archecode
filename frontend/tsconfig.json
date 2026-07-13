@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@shared-ui": ["./app/shared/ui/index"]
     }
   },
   "include": [
