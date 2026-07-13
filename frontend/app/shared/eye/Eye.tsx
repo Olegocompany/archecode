@@ -1,10 +1,10 @@
 import { CloseEye, OpenEye } from "@/app/shared/svg";
 
 interface EyeProps {
-  state: "open" | "close";
+  state?: "open" | "close";
 }
 
-function Eye({ state }: EyeProps) {
+function Eye({ state = "open" }: EyeProps) {
   return (
     <>
       {state === "open" ? (
