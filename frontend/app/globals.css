@@ -23,7 +23,7 @@
   --color-light-gray: var(--light-gray);
   --color-gray: var(--gray);
   --color-dark-gray: var(--dark-gray);
-  --color-primary-light: var(--lighter-gray);
+  --color-lighter-gray: var(--lighter-gray);
   --color-primary-dark: var(--primary-dark);
   --color-accent-base: var(--accent-base);
   --color-accent-light: var(--accent-light);

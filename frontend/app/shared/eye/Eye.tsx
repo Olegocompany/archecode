@@ -8,9 +8,9 @@ function Eye({ state }: EyeProps) {
   return (
     <>
       {state === "open" ? (
-        <OpenEye className="w-full h-full text-primary-dark cursor-pointer hover:lighter-gray active:text-input-placeholder transition duration-300" />
+        <OpenEye className="w-full h-full cursor-pointer text-primary-dark  hover:text-lighter-gray active:text-input-placeholder transition duration-300" />
       ) : (
-        <CloseEye className="w-full h-full text-primary-dark cursor-pointer hover:text-primary active:text-input-placeholder transition duration-300" />
+        <CloseEye className="w-full h-full cursor-pointer text-primary-dark  hover:text-lighter-gray active:text-input-placeholder transition duration-300" />
       )}
     </>
   );
