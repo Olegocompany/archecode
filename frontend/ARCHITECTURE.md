@@ -59,7 +59,7 @@
 1. Алиас `@/` — всегда, без относительных путей вверх:
    ```tsx
    // ✅ глобальный слой
-   import { Input } from "@/app/shared/input";
+   import { Password } from "@/app/shared/input";
    import { useAuthStore } from "@/app/store/use-auth-store";
    import { cn } from "@/app/lib/cn";
    import { User } from "@/app/types/user";
@@ -69,7 +69,7 @@
    import { authApi } from "@/app/(auth)/_lib/auth-api";
 
    // ❌ относительные пути вверх
-   import { Input } from "../../shared/input";
+   import { Password } from "../../shared/input";
    ```
 
 ---
@@ -81,7 +81,7 @@ frontend/
 ├── app/
 │   ├── shared/                       # 🔷 Общий слой
 │   │   ├── input.tsx                 #    UI-компоненты (ничего не знают о бизнесе)
-│   │   ├── input.variants.ts
+│   │   ├── password.variants.ts
 │   │   ├── button.tsx
 │   │   └── modal.tsx
 │   │
@@ -201,9 +201,9 @@ frontend/
 
 | Сущность          | Стиль                       | Пример                         |
 | ----------------- | --------------------------- | ------------------------------ |
-| Компоненты        | PascalCase                  | `Input`, `UsersTable`          |
+| Компоненты        | PascalCase                  | `Password`, `UsersTable`       |
 | Файлы компонентов | kebab-case                  | `input.tsx`, `users-table.tsx` |
-| Файлы вариантов   | kebab-case + `.variants`    | `input.variants.ts`            |
+| Файлы вариантов   | kebab-case + `.variants`    | `password.variants.ts`         |
 | Хуки              | camelCase + `use`           | `useDebounce`, `useAuthStore`  |
 | Файлы хуков       | kebab-case + `use-`         | `use-debounce.ts`              |
 | Сторы             | camelCase + `use` + `Store` | `useThemeStore`                |
