@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Input from "@/app/shared/input";
 import { AppLink } from "@/app/shared/link";
-import { AppEye } from "@/app/shared/eye";
+import { Eye } from "@/app/shared/eye";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
         <div className="w-140 h-70">
           <Input type={"text"} placeholder={"Логин"} error={"олег"} />
           <AppLink to={"/"}>Сюда</AppLink>
-          <AppEye state={"close"} />
+          <Eye state={"close"} />
         </div>
 
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">

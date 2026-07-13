@@ -1,1 +1,1 @@
-export { default as AppEye } from "./AppEye";
+export { default as Eye } from "./Eye";
