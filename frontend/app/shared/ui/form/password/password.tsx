@@ -7,15 +7,19 @@ interface InputProps {
   disabled?: boolean;
   error?: boolean | string;
   placeholder?: string;
+  type?: string;
 }
 
-function Password({ disabled, error, placeholder }: InputProps) {
+function Password({
+  disabled,
+  error,
+  placeholder,
+  type = "password",
+}: InputProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [inputType, setInputType] = useState("password");
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
-    setInputType(inputType === "password" ? "text" : "password");
   };
   return (
     <div>
@@ -24,7 +28,7 @@ function Password({ disabled, error, placeholder }: InputProps) {
           className="flex w-full items-center justify-center focus:outline-none! focus-visible:outline-none!"
           disabled={disabled}
           placeholder={placeholder}
-          type={inputType}
+          type={showPassword ? "text" : "password"}
         />
         <Eye state={showPassword} handleClick={handleShowPassword} />
       </label>
