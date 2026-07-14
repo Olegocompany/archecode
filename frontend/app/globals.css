@@ -14,6 +14,8 @@
   --placeholder-hover: #888888;
   --placeholder-active: #aaaaaa;
   --error: #821616;
+
+  /* для анимаций  */
 }
 
 @theme inline {
@@ -55,4 +57,15 @@
   bottom: 0;
   border-radius: 40px;
   background-image: linear-gradient(0, var(--dark-gray) 21%, transparent 81%);
+}
+
+.progresss {
+  --progress: 1;
+  --r: 11;
+  --PI: 3.14;
+  --lengthCircle: calc(2 * var(--PI) * var(--r));
+
+  transition: all 0.3s linear;
+  stroke-dasharray: var(--progress) var(--lengthCircle);
+  stroke-dashoffset: 0;
 }

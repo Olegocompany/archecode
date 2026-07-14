@@ -12,8 +12,6 @@ export default function Widget() {
     newPoint[positionPoint] = false;
     newPoint[nextIndex] = true;
 
-    console.log(point);
-
     setPoint(newPoint);
     setPositionPoint(nextIndex);
   };
@@ -40,19 +38,37 @@ export default function Widget() {
         </div>
         <div className="flex gap-[36px]">
           {point.map((i, index) => (
-            <div
-              className={
-                `size-[30px] rounded-full flex justify-center items-center ` +
-                `${i ? "bg-accent-base/50" : ""}`
-              }
-              key={index}
-            >
-              <div
-                className="size-[14px] bg-white rounded-full"
-                style={{
-                  backgroundColor: i ? "var(--accent-base)" : "var(--white)",
-                }}
-              />
+            <div className="relative justify-center items-center" key={index}>
+              <svg
+                width="40"
+                height="40"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ transform: "rotate(-90deg)" }}
+              >
+                <g className="relative flex justify-center items-center">
+                  <circle
+                    cx="20"
+                    cy="20"
+                    r="7"
+                    style={{
+                      fill: i ? " var(--accent-base) " : "var(--white) ",
+                    }}
+                  />
+
+                  {i && (
+                    <circle
+                      cx="20"
+                      cy="20"
+                      r="11"
+                      stroke="black"
+                      strokeWidth="7"
+                      fill="none"
+                      id="circle"
+                      className="absolute progresss"
+                    />
+                  )}
+                </g>
+              </svg>
             </div>
           ))}
         </div>
