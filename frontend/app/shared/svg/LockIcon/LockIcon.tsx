@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SVGProps } from "react";
-const Lock = (props: SVGProps<SVGSVGElement>) => (
+const LockIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none">
     <g
       stroke="currentColor"
@@ -13,4 +13,4 @@ const Lock = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 );
-export default Lock;
+export default LockIcon;
