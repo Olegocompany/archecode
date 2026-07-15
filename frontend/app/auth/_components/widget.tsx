@@ -1,27 +1,62 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import {ReactNode, useEffect, useEffectEvent, useRef, useState} from "react";
+
 
 export default function Widget() {
-  const time = 3000;
+  const [timers, setTimers] = useState(0);
   const [point, setPoint] = useState([true, false, false]);
   const [positionPoint, setPositionPoint] = useState(0);
+  const elementPo = useRef<SVGCircleElement>(null)
+  const [progress, setProgress] = useState(1)
 
   const changePoint = () => {
     const newPoint = [...point];
     const nextIndex = (positionPoint + 1) % point.length;
     newPoint[positionPoint] = false;
     newPoint[nextIndex] = true;
-
+    setProgress(1)
     setPoint(newPoint);
     setPositionPoint(nextIndex);
+    setCycleStart(new Date().getTime())
   };
+    const intervalFunc = useEffectEvent(() => {
+        setTimers(timers + 1)
+    })
 
-  useEffect(() => {
-    setTimeout(changePoint, time);
-    return () => {};
-  }, [changePoint, positionPoint]);
+    useEffect(() => {
+        setInterval(intervalFunc, 3000)
+    }, [])
 
-  return (
+
+    const changePointAdapter = useEffectEvent(changePoint);
+
+    const [cycleStart, setCycleStart] = useState(0);
+
+    const getSecondsDiff = () => {
+        return ((new Date().getTime() - cycleStart) / 1000 ) % 60
+    }
+
+    const changeProgress = () => {
+        const progressCount = 1 + (190 - 1) * (getSecondsDiff() / 3);
+        setProgress(progressCount)
+        if (elementPo.current) elementPo.current.style.setProperty("--progress", `${progress}%`);
+    }
+
+    const changeProgressAdapter = useEffectEvent(changeProgress);
+
+    useEffect(() => {
+        setCycleStart(new Date().getTime())
+        const progressInterval = setInterval(changeProgressAdapter, 50)
+        const interval = setInterval(changePointAdapter, 3000);
+        return () => {
+            clearInterval(interval)
+            clearInterval(progressInterval)}
+    }, []);
+
+
+
+
+    return (
     <div className="flex w-full h-fullbg-white relative">
       <div
         className="widget w-full h-full bg-cover bg-center bg-no-repeat rounded-[40px] flex justify-end items-center"
@@ -61,10 +96,11 @@ export default function Widget() {
                       cy="20"
                       r="11"
                       stroke="black"
-                      strokeWidth="7"
+                      strokeWidth="8"
                       fill="none"
                       id="circle"
-                      className="absolute progresss"
+                      className="absolute progresss stroke-accent-base opacity-80"
+                      ref={elementPo}
                     />
                   )}
                 </g>

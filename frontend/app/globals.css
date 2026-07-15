@@ -64,8 +64,7 @@
   --r: 11;
   --PI: 3.14;
   --lengthCircle: calc(2 * var(--PI) * var(--r));
-
-  transition: all 0.3s linear;
+  transition: all 0.1s linear;
   stroke-dasharray: var(--progress) var(--lengthCircle);
   stroke-dashoffset: 0;
 }
