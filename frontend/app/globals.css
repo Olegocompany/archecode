@@ -68,3 +68,19 @@
   stroke-dasharray: var(--progress) var(--lengthCircle);
   stroke-dashoffset: 0;
 }
+.widgetText{
+    animation: text 3s ease infinite;
+}
+
+@keyframes text {
+    0%{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    25%{
+        transform: translateY(0);
+    }
+    100%{
+        opacity: 1;
+    }
+}
