@@ -5,7 +5,7 @@ const PlusIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    className="drop-shadow-[0_4px_4px_rgba(0,0,0,0.25),0_0_6px_rgba(0,185,6,0.75)]"
+    className="max-w-8 max-h-8 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25),0_0_6px_rgba(0,185,6,0.75)]"
   >
     <path
       stroke="currentColor"
