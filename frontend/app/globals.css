@@ -5,9 +5,12 @@
   --light-gray: #484848;
   --gray: #242424;
   --dark-gray: #121212;
+  --lighter-gray: #525252;
+  --primary-dark: #404040;
   --accent-base: #56ae63;
   --accent-light: #54ca58;
   --accent-lighter: #55f05b;
+  --accent-dark: #329735;
   --auxiliary: #63eddc;
   --input-outline: #323232;
   --input-placeholder: #666666;
@@ -23,9 +26,12 @@
   --color-light-gray: var(--light-gray);
   --color-gray: var(--gray);
   --color-dark-gray: var(--dark-gray);
+  --color-lighter-gray: var(--lighter-gray);
+  --color-primary-dark: var(--primary-dark);
   --color-accent-base: var(--accent-base);
   --color-accent-light: var(--accent-light);
   --color-accent-lighter: var(--accent-lighter);
+  --color-accent-dark: var(--accent-dark);
   --color-auxiliary: var(--auxiliary);
   --color-input-outline: var(--input-outline);
   --color-input-placeholder: var(--input-placeholder);
