@@ -5,7 +5,7 @@ const AvatarIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    className="drop-shadow-[0_0_6px_var(--white)]"
+    className="max-w-7 max-h-7 drop-shadow-[0_0_6px_var(--white)]"
   >
     <path
       stroke="currentColor"
