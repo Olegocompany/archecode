@@ -1,11 +1,14 @@
 package com.free.archecode.user;
 
 import com.free.archecode.role.Role;
+
 import jakarta.persistence.*;
 import lombok.ToString;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"email"})
+)
 @ToString(exclude = "role")
 public class User {
 

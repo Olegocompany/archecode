@@ -1,4 +1,4 @@
-package com.free.archecode.user.dto.auth;
+package com.free.archecode.user.dto.auth.response;
 
 import lombok.Data;
 

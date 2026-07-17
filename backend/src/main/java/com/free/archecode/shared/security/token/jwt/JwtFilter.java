@@ -1,4 +1,4 @@
-package com.free.archecode.shared.config.security.jwt;
+package com.free.archecode.shared.security.token.jwt;
 
 import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
 import com.free.archecode.shared.config.security.user.ImpUserAuthDetailsService;

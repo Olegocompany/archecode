@@ -1,6 +1,6 @@
 package com.free.archecode.shared.config.security;
 
-import com.free.archecode.shared.config.security.jwt.JwtFilter;
+import com.free.archecode.shared.security.token.jwt.JwtFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

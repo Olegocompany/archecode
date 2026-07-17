@@ -1,6 +1,7 @@
 package com.free.archecode.shared.config;
 
-import com.free.archecode.shared.exceptions.InvalidRoleException;
+import com.free.archecode.shared.common.exceptions.InvalidRoleException;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -58,6 +59,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest().body(Map.of(prefix, "Invalid JSON"));
+    }
+
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<Map<String, String>> handleServiceException(ServiceException ex) {
+        return ResponseEntity.internalServerError().body(Map.of(prefix, "Internal Server Error"));
     }
 
     // все остальное

@@ -9,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.Collections;
 
-
 public class ImpUserAuthDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
 
     private final User user;
@@ -40,6 +39,10 @@ public class ImpUserAuthDetails implements org.springframework.security.core.use
     @Override
     public void eraseCredentials() {
         this.user.setPassword(null);
+    }
+
+    public Long getUserId() {
+        return user.getId();
     }
 
 }
