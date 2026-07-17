@@ -3,7 +3,6 @@ import { ReactNode, useEffect, useRef } from "react";
 
 interface PointProps {
   point: boolean;
-  cycleStart: number;
   progress: number;
 }
 
@@ -11,13 +10,8 @@ export default function Point({ point, progress }: PointProps) {
   const elementCircle = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
-    const progressInterval = setInterval(() => {
       if (elementCircle.current)
         elementCircle.current.style.setProperty("--progress", `${progress}%`);
-    });
-    return () => {
-      clearInterval(progressInterval);
-    };
   }, [progress]);
 
   return (

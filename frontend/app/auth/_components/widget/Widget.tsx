@@ -1,6 +1,6 @@
 "use client";
 import {ReactNode, useEffect, useEffectEvent, useRef, useState} from "react";
-import { Point } from "@/app/auth/";
+import { Point } from "@/app/auth";
 
 export default function Widget() {
   const [point, setPoint] = useState([true, false, false]);
@@ -9,12 +9,11 @@ export default function Widget() {
   const elementBlockPicture = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(1)
   const [onAnimation, setOnAnimation] = useState(true)
-  const listPicture = ['/widget/photo-one.png', '/widget/photo-two.png', '/widget/photo-three.png', '/widget/photo-one.png']
+  const listPicture = ['/images/widget/photo-one.png', '/images/widget/photo-two.png', '/images/widget/photo-three.png', '/images/widget/photo-one.png']
   const listText = [
       ['Оптимизируй работу своей команды', 'Создай свою команду и следим за движениями'],
       ['Создай свою команду и следим за движениями', 'Оптимизируй работу своей команды'],
       ['ОпОПОПОПОПОПОП своееее zzzzz', 'Оптимизируй работу своей команды']]
-  const [currentText, setCurrentText] = useState(0)
   const [currentPicture, setCurrentPicture] = useState(0);
   const [cycleStart, setCycleStart] = useState(0);
 
@@ -29,7 +28,6 @@ export default function Widget() {
     setPoint(newPoint);
     setPositionPoint(nextIndex);
 
-    changeText()
     setCycleStart(new Date().getTime())
     changePicture()
     };
@@ -40,22 +38,18 @@ export default function Widget() {
         setOnAnimation(true)
         setCurrentPicture((currentPicture + 1) % 4 )
     }
-    const changeText = () => {
-        setCurrentText( (currentText + 1) % 3 )
-    }
 
     const getSecondsDiff = () => {
         return ((new Date().getTime() - cycleStart) / 1000 ) % 60
     }
 
     const changeProgress = () => {
-        const progressCount = 1 + (190 - 1) * (getSecondsDiff() / 3);
-        setProgress(progressCount)
+        setProgress(1 + (190 - 1) * (getSecondsDiff() / 3))
     }
 
     const changeProgressAdapter = useEffectEvent(changeProgress);
 
-    const t = () =>{
+    const time = () =>{
         if (currentPicture === 3){
             setOnAnimation(false)
             setCurrentPicture(0)
@@ -63,9 +57,9 @@ export default function Widget() {
     }
 
     useEffect(() => {
-        const l = setInterval(t, 500)
+        const pictureInterval = setInterval(time, 500)
         return () => {
-            clearInterval(l)
+            clearInterval(pictureInterval)
         }
     }, [currentPicture]);
 
@@ -96,16 +90,16 @@ export default function Widget() {
       <div className="absolute h-full flex w-full bottom-0 items-center justify-end py-[40px] flex-col gap-[34px]">
         <div className="text-center flex flex-col gap-1">
           <p className="widgetText text-[32px] text-white transition duration-300">
-              {listText[currentText][0]}
+              {listText[positionPoint][0]}
           </p>
           <p className="widgetText text-[18px] text-white/70 transition duration-300">
-              {listText[currentText][1]}
+              {listText[positionPoint][1]}
           </p>
         </div>
         <div className="flex gap-[36px]">
           {point.map((i, index) => (
               <div className="relative justify-center items-center" key={index}>
-                <Point point={i} cycleStart={cycleStart} progress={progress} />
+                <Point point={i} progress={progress} />
               </div>
           ))}
         </div>

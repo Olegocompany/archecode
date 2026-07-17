@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Widget from "@/app/auth/_components/Widget";
+import { Widget } from "@/app/auth";
 
 export default function Auth() {
   return (
