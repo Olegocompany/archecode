@@ -1,11 +1,10 @@
 "use client";
 import {ReactNode, useEffect, useEffectEvent, useRef, useState} from "react";
+import { Point } from "@/app/auth/";
 
 export default function Widget() {
-  const [timers, setTimers] = useState(0);
   const [point, setPoint] = useState([true, false, false]);
   const [positionPoint, setPositionPoint] = useState(0);
-  const elementPo = useRef<SVGCircleElement>(null)
   const elementPicture = useRef<HTMLDivElement>(null)
   const elementBlockPicture = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(1)
@@ -17,6 +16,7 @@ export default function Widget() {
       ['ОпОПОПОПОПОПОП своееее zzzzz', 'Оптимизируй работу своей команды']]
   const [currentText, setCurrentText] = useState(0)
   const [currentPicture, setCurrentPicture] = useState(0);
+  const [cycleStart, setCycleStart] = useState(0);
 
   const changePoint = () => {
     const newPoint = [...point];
@@ -29,18 +29,10 @@ export default function Widget() {
     setPoint(newPoint);
     setPositionPoint(nextIndex);
 
+    changeText()
     setCycleStart(new Date().getTime())
     changePicture()
-    changeText()
-  };
-    const intervalFunc = useEffectEvent(() => {
-        setTimers(timers + 1)
-    })
-
-    useEffect(() => {
-        setInterval(intervalFunc, 3000)
-    }, [])
-
+    };
 
     const changePointAdapter = useEffectEvent(changePoint);
 
@@ -52,8 +44,6 @@ export default function Widget() {
         setCurrentText( (currentText + 1) % 3 )
     }
 
-    const [cycleStart, setCycleStart] = useState(0);
-
     const getSecondsDiff = () => {
         return ((new Date().getTime() - cycleStart) / 1000 ) % 60
     }
@@ -61,18 +51,17 @@ export default function Widget() {
     const changeProgress = () => {
         const progressCount = 1 + (190 - 1) * (getSecondsDiff() / 3);
         setProgress(progressCount)
-        if (elementPo.current) elementPo.current.style.setProperty("--progress", `${progress}%`);
     }
 
     const changeProgressAdapter = useEffectEvent(changeProgress);
 
     const t = () =>{
-        console.log(currentPicture)
         if (currentPicture === 3){
             setOnAnimation(false)
             setCurrentPicture(0)
         }
     }
+
     useEffect(() => {
         const l = setInterval(t, 500)
         return () => {
@@ -89,9 +78,6 @@ export default function Widget() {
             clearInterval(progressInterval)}
     }, []);
 
-
-
-    // <div className={`w-full flex` + onAnimation ? `transition duration-300` :  `transition duration-300` }
     return (
     <div className="flex w-full h-fullbg-white relative overflow-hidden rounded-[40px]">
     <div className="w-full flex"
@@ -118,39 +104,9 @@ export default function Widget() {
         </div>
         <div className="flex gap-[36px]">
           {point.map((i, index) => (
-            <div className="relative justify-center items-center" key={index}>
-              <svg
-                width="40"
-                height="40"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ transform: "rotate(-90deg)" }}
-              >
-                <g className="relative flex justify-center items-center">
-                  <circle
-                    cx="20"
-                    cy="20"
-                    r="7"
-                    style={{
-                      fill: i ? " var(--accent-base) " : "var(--white) ",
-                    }}
-                  />
-
-                  {i && (
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="11"
-                      stroke="black"
-                      strokeWidth="8"
-                      fill="none"
-                      id="circle"
-                      className="absolute progresss stroke-accent-base opacity-80"
-                      ref={elementPo}
-                    />
-                  )}
-                </g>
-              </svg>
-            </div>
+              <div className="relative justify-center items-center" key={index}>
+                <Point point={i} cycleStart={cycleStart} progress={progress} />
+              </div>
           ))}
         </div>
       </div>

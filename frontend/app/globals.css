@@ -75,7 +75,7 @@
   stroke-dashoffset: 0;
 }
 .widgetText {
-  animation: text 3s ease infinite;
+  animation: text 3000ms ease infinite;
 }
 
 @keyframes text {
