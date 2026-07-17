@@ -16,7 +16,7 @@
   --input-placeholder: #666666;
   --placeholder-hover: #888888;
   --placeholder-active: #aaaaaa;
-  --error: #821616;
+  --error: #da2b2b;
 }
 
 @theme inline {
