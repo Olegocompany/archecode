@@ -1,6 +1,6 @@
 package com.free.archecode.shared.config.security;
 
-import com.free.archecode.shared.config.security.jwt.JwtFilter;
+import com.free.archecode.shared.security.token.jwt.JwtFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +36,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login", "/auth/register", "/public/**").permitAll()
+                        .requestMatchers("/auth/login", "/auth/register", "/auth/refresh", "/public/**").permitAll()
                         .anyRequest().authenticated()
                 ) // разрешить какие публичные (для всех) и для входа с регистрацией
 

@@ -1,8 +1,10 @@
 package com.free.archecode.user.dto;
 
 import com.free.archecode.user.User;
-import com.free.archecode.user.dto.auth.AuthResponse;
-import com.free.archecode.user.dto.auth.RegisterUserRequest;
+import com.free.archecode.user.dto.auth.request.RegisterUserRequest;
+import com.free.archecode.user.dto.auth.response.AuthResponse;
+import com.free.archecode.user.dto.auth.response.ContainerAuthResponse;
+import com.free.archecode.user.dto.request.UpdateUserRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -20,5 +22,6 @@ public interface UserMapper {
 
     void update(UpdateUserRequest updateUserRequest, @MappingTarget User user); // для обновы. прием с updateUserRequest и указание кого обновлять
 
+    ContainerAuthResponse toAuthResponse(String jwtToken,  String refreshToken);
     AuthResponse toAuthResponse(String token);
 }

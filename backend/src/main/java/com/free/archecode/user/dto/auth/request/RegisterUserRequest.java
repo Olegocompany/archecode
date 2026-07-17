@@ -1,4 +1,4 @@
-package com.free.archecode.user.dto.auth;
+package com.free.archecode.user.dto.auth.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;

@@ -1,4 +1,4 @@
-package com.free.archecode.user.dto.auth;
+package com.free.archecode.user.dto.auth.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

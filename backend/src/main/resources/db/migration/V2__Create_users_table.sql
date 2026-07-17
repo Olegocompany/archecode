@@ -5,5 +5,7 @@ create table users (
     surname varchar(100),
     password varchar(255),
     role_id bigint unsigned not null,
-    foreign key (role_id) references roles(id) on delete restrict on update cascade
+    foreign key (role_id) references roles(id) on delete restrict on update cascade,
+
+    index idx_users_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;

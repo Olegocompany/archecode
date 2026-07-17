@@ -1,4 +1,4 @@
-package com.free.archecode.shared.exceptions;
+package com.free.archecode.shared.common.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
