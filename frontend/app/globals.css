@@ -65,7 +65,7 @@
   background-image: linear-gradient(0, var(--dark-gray) 21%, transparent 81%);
 }
 
-.progresss {
+.progress {
   --progress: 1;
   --r: 11;
   --PI: 3.14;
