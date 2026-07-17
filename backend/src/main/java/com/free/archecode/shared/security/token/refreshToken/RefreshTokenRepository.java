@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,13 +20,12 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long
     void deleteExpired();
 
     @Modifying
-    @Query("UPDATE RefreshToken rt SET rt.revoked = true WHERE rt.userId = :userId")
-    void revokeAllTokensByUserId(@Param("userId") Long userId);
+    @Query("UPDATE RefreshToken rt SET rt.revoked = true WHERE rt.userId = :user_id")
+    void revokeAllTokensByUserId(@Param("g_userId") Long userId);
 
     @Modifying
-    @Query("UPDATE RefreshToken rt SET rt.revoked = true WHERE rt.tokenHash = ?1")
-    void revokeTokenByTokenHash(String tokenHash);
+    @Query("UPDATE RefreshToken rt SET rt.revoked = true WHERE rt.tokenHash = :g_tokenHash")
+    void revokeTokenByTokenHash(@Param("g_tokenHash") String tokenHash);
 
-    @Query("SELECT rt from RefreshToken where rt.revoked = false and rt.userId = ?1")
-    void findAllByUserIdWhereNotRevoked(Long userId);
+    List<RefreshToken> findAllByUserIdAndRevokedFalse(Long userId);
 }

@@ -1,21 +1,36 @@
 package com.free.archecode.controller.user;
 
-import com.free.archecode.user.dto.UserMapper;import com.free.archecode.user.dto.auth.request.LoginUserRequest;
+import com.free.archecode.user.dto.UserMapper;
+import com.free.archecode.user.dto.auth.request.LoginUserRequest;
 import com.free.archecode.user.dto.auth.request.RegisterUserRequest;
 import com.free.archecode.user.dto.auth.response.AuthResponse;
-import com.free.archecode.user.dto.auth.response.ContainerAuthResponse;import com.free.archecode.user.service.AuthService;
-import jakarta.servlet.http.Cookie;import jakarta.servlet.http.HttpServletResponse;import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import com.free.archecode.user.dto.auth.response.ContainerAuthResponse;
+import com.free.archecode.user.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@AllArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
-    private final static String cookieName = "token2";private final UserMapper userMapper;
+    private final UserMapper userMapper;
+
+    private final static String cookieName = "rtoken";
+
+    @Value("${jwt.refresh.expiration}")
+    private long expiration;
+
+    public AuthController(AuthService authService, UserMapper userMapper) {
+        this.authService = authService;
+        this.userMapper = userMapper;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(
@@ -23,7 +38,7 @@ public class AuthController {
             HttpServletResponse httpServletResponse
     ) {
         ContainerAuthResponse containerAuthResponse = authService.register(request);
-        httpServletResponse.addCookie(new Cookie(cookieName, containerAuthResponse.refreshToken()));
+        setTokenToCookie(httpServletResponse, containerAuthResponse.refreshToken());
         return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthResponse.jwtToken()));
     }
 
@@ -33,17 +48,34 @@ public class AuthController {
             HttpServletResponse httpServletResponse
     ) {
         ContainerAuthResponse containerAuthResponse = authService.login(request);
-        httpServletResponse.addCookie(new Cookie(cookieName, containerAuthResponse.refreshToken()));
+        setTokenToCookie(httpServletResponse, containerAuthResponse.refreshToken());
         return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthResponse.jwtToken()));
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refresh(
-            @CookieValue(value = cookieName) String refreshToken,
+    public ResponseEntity<?> refresh(
+            @CookieValue(name = cookieName, required = true, defaultValue = "") String refreshToken,
+            HttpServletRequest  httpServletRequest,
             HttpServletResponse httpServletResponse
             ) {
+        if (refreshToken == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        System.out.println(refreshToken);
         ContainerAuthResponse containerAuthResponse = authService.refreshToken(refreshToken);
-        httpServletResponse.addCookie(new Cookie(cookieName, containerAuthResponse.refreshToken()));
+        setTokenToCookie(httpServletResponse, containerAuthResponse.refreshToken());
         return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthResponse.jwtToken()));
+    }
+
+    private void setTokenToCookie(HttpServletResponse httpServletResponse, String token) {
+        ResponseCookie cookie = ResponseCookie.from(cookieName, token)
+            .httpOnly(true)
+            .secure(true)
+            .maxAge(expiration/1000)
+            .path("/auth/refresh")
+            .sameSite("Strict")
+            .build();
+
+        httpServletResponse.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
     }
 }

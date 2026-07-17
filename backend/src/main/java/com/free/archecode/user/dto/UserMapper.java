@@ -23,5 +23,5 @@ public interface UserMapper {
     void update(UpdateUserRequest updateUserRequest, @MappingTarget User user); // для обновы. прием с updateUserRequest и указание кого обновлять
 
     ContainerAuthResponse toAuthResponse(String jwtToken,  String refreshToken);
-    AuthResponse toAuthResponse(String jwtToken);
+    AuthResponse toAuthResponse(String token);
 }

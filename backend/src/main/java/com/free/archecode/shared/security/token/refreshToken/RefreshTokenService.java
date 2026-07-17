@@ -89,6 +89,8 @@ public class RefreshTokenService {
         }
 
         try {
+            rt.setRevoked(true);
+            tokenRepository.save(rt);
             ImpUserAuthDetails user = impUserAuthDetailsService.loadUserByUserId(rt.getUserId());
             return user;
         } catch (UsernameNotFoundException e) {

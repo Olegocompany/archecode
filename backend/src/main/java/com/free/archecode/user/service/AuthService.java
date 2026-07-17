@@ -45,7 +45,7 @@ public class AuthService {
 
     /**
      * @throws BadCredentialsException
-     * @param refreshToken
+     * @param data (from request)
      * @return pair jwtToken + refreshToken
      */
     public ContainerAuthResponse login(LoginUserRequest data) {
