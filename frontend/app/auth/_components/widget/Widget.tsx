@@ -90,10 +90,10 @@ export default function Widget() {
     </div>
       <div className="absolute h-full flex w-full bottom-0 items-center justify-end py-[40px] flex-col gap-[34px]">
         <div className="text-center flex flex-col gap-1">
-          <p className={"text-[32px] text-white transition duration-300" + styles.widgetText } >
+          <p className={"text-[32px] text-white transition duration-300 " + styles.widgetText }>
               {listText[positionPoint][0]}
           </p>
-          <p className={"text-[18px] text-white/70 transition duration-300" + styles.widgetText } >
+          <p className={"text-[18px] text-white/70 transition duration-300 " + styles.widgetText } >
               {listText[positionPoint][1]}
           </p>
         </div>

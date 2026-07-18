@@ -20,8 +20,9 @@
         opacity: 0;
         transform: translateY(20px);
     }
-    25% {
-        transform: translateY(0);
+    5% {
+        opacity: 0;
+        transform: translateY(10px);
     }
     50% {
         opacity: 1;
