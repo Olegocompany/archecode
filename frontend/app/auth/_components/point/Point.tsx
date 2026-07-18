@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode } from "react";
 
 interface PointProps {
   point: boolean;
@@ -7,12 +7,6 @@ interface PointProps {
 }
 
 export default function Point({ point, progress }: PointProps) {
-  const elementCircle = useRef<SVGCircleElement>(null);
-
-  useEffect(() => {
-      if (elementCircle.current)
-        elementCircle.current.style.setProperty("--progress", `${progress}%`);
-  }, [progress]);
 
   return (
     <svg
@@ -40,8 +34,8 @@ export default function Point({ point, progress }: PointProps) {
             strokeWidth="8"
             fill="none"
             id="circle"
-            className="absolute progress stroke-accent-base opacity-80"
-            ref={elementCircle}
+            className="absolute progress stroke-accent-base opacity-80 transition duration-300"
+            style={{strokeDasharray: `${progress}, ${2 * 3.14 * 11}`, strokeDashoffset: 0  }}
           />
         )}
       </g>

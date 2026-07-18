@@ -1,6 +1,7 @@
 "use client";
 import {ReactNode, useEffect, useEffectEvent, useRef, useState} from "react";
 import { Point } from "@/app/auth";
+import styles from './widget.module.css'
 
 export default function Widget() {
   const [point, setPoint] = useState([true, false, false]);
@@ -44,7 +45,7 @@ export default function Widget() {
     }
 
     const changeProgress = () => {
-        setProgress(1 + (190 - 1) * (getSecondsDiff() / 3))
+        setProgress(1 + (75 - 1) * (getSecondsDiff() / 3))
     }
 
     const changeProgressAdapter = useEffectEvent(changeProgress);
@@ -80,7 +81,7 @@ export default function Widget() {
     >
         {listPicture.map((item, i) => (
             <div
-                className="shrink-0 widget w-full h-full bg-cover bg-center bg-no-repeat rounded-[40px] flex justify-end items-center "
+                className={"shrink-0 widget w-full h-full bg-cover bg-center bg-no-repeat rounded-[40px] flex justify-end items-center " + styles.widget}
                 style={{ backgroundImage: `url(${item})` }}
                 ref={ elementPicture }
                 key={ i }
@@ -89,10 +90,10 @@ export default function Widget() {
     </div>
       <div className="absolute h-full flex w-full bottom-0 items-center justify-end py-[40px] flex-col gap-[34px]">
         <div className="text-center flex flex-col gap-1">
-          <p className="widgetText text-[32px] text-white transition duration-300">
+          <p className={"text-[32px] text-white transition duration-300" + styles.widgetText } >
               {listText[positionPoint][0]}
           </p>
-          <p className="widgetText text-[18px] text-white/70 transition duration-300">
+          <p className={"text-[18px] text-white/70 transition duration-300" + styles.widgetText } >
               {listText[positionPoint][1]}
           </p>
         </div>
