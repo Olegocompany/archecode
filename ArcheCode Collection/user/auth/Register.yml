@@ -21,7 +21,8 @@ http:
         "name": "Jakajadsarta",
         "surname": "Koljimun",
         "email": "secOne2@jjaaa.aaa",
-        "password": "password"
+        "password": "password",
+        "role_name": "user"
       }
   auth: inherit
 

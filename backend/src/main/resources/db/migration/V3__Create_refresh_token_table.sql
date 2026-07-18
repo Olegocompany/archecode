@@ -1,9 +1,9 @@
-CREATE TABLE refresh_token
+CREATE TABLE refresh_tokens
 (
     id         SERIAL PRIMARY KEY,
     token_hash VARCHAR(255) NOT NULL UNIQUE,
     user_id    BIGINT unsigned NOT NULL,
-    created_at timestamp default current_timestamp,
+    created_at timestamp not null default current_timestamp,
     expires_at datetime     NOT NULL,
     foreign key (user_id) references users(id) on DELETE CASCADE on update CASCADE,
     revoked boolean default false,

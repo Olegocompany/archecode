@@ -2,6 +2,22 @@ opencollection: 1.0.0
 
 info:
   name: ArcheCode Collection
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  variables:
+    - name: host
+      value: http://127.0.0.1:8080
 bundled: false
 extensions:
   bruno:

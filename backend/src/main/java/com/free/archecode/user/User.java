@@ -1,15 +1,18 @@
 package com.free.archecode.user;
 
+import com.free.archecode.project.Project;
 import com.free.archecode.role.Role;
 
 import jakarta.persistence.*;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users",
         uniqueConstraints = @UniqueConstraint(columnNames = {"email"})
 )
-@ToString(exclude = "role")
+@ToString(exclude = {"role", "projects"})
 public class User {
 
     @Id
@@ -22,9 +25,12 @@ public class User {
     private String name;
     private String surname;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToMany(mappedBy = "project")
+    private List<Project> projects;
     
     // setters
     public void setRole(Role role) {
@@ -49,6 +55,16 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void addProject(Project project) {
+        this.projects.add(project);
+    }
+    public void removeProject(Project project) {
+        this.projects.remove(project);
+    }
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     // getters

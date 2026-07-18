@@ -5,14 +5,14 @@ import jakarta.persistence.*;import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Table(name = "refresh_token")
+@Table(name = "refresh_tokens")
 @Data
 public class RefreshToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="token_hash", nullable=false)
+    @Column(name="token_hash", nullable=false, updatable = false)
     private String tokenHash;
 
     @Column(name="user_id",  nullable=false)
