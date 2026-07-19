@@ -8,9 +8,9 @@ import com.free.archecode.shared.security.token.refreshToken.RefreshTokenService
 import com.free.archecode.user.User;
 import com.free.archecode.user.UserRepository;
 import com.free.archecode.user.dto.UserMapper;
-import com.free.archecode.user.dto.auth.request.LoginUserRequest;
-import com.free.archecode.user.dto.auth.request.RegisterUserRequest;
-import com.free.archecode.user.dto.auth.response.ContainerAuthResponse;
+import com.free.archecode.user.dto.auth.request.LoginUserDtoRequest;
+import com.free.archecode.user.dto.auth.request.RegisterUserDtoRequest;
+import com.free.archecode.user.dto.auth.response.ContainerAuthDtoResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,7 +33,7 @@ public class AuthService {
 
     private static final Set<String> ALLOWED_ROLES = Set.of("user", "worker");
 
-    public ContainerAuthResponse register(RegisterUserRequest data) {
+    public ContainerAuthDtoResponse register(RegisterUserDtoRequest data) {
         validateRole(data.getRole_name());
 
         User user = userMapper.toEntity(data);
@@ -48,7 +48,7 @@ public class AuthService {
      * @param data (from request)
      * @return pair jwtToken + refreshToken
      */
-    public ContainerAuthResponse login(LoginUserRequest data) {
+    public ContainerAuthDtoResponse login(LoginUserDtoRequest data) {
         User user = userRepository.findByEmail(data.getEmail())
                 .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
 
@@ -64,7 +64,7 @@ public class AuthService {
      * @param refreshToken
      * @return pair jwtToken + refreshToken
      */
-    public ContainerAuthResponse refreshToken(String refreshToken) {
+    public ContainerAuthDtoResponse refreshToken(String refreshToken) {
         ImpUserAuthDetails user = refreshTokenService.getUserByToken(refreshToken);
         if (user == null) {
             throw new BadCredentialsException("Invalid token");
@@ -86,7 +86,7 @@ public class AuthService {
      * @param user
      * @return ContainerAuthResponse (jwtToken, refreshToken)
      */
-    private ContainerAuthResponse generateTokenPair(ImpUserAuthDetails user) {
+    private ContainerAuthDtoResponse generateTokenPair(ImpUserAuthDetails user) {
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = refreshTokenService.generateToken(user);
 

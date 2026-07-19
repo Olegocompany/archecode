@@ -2,6 +2,7 @@ package com.free.archecode.shared.security.token.jwt;
 
 import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
 import com.free.archecode.shared.config.security.user.ImpUserAuthDetailsService;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
@@ -59,7 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authDetails);
                 }
             }
-        } catch (MalformedJwtException | SignatureException e ) {/* ничего не делать - токен не валиден */}
+        } catch (MalformedJwtException | ExpiredJwtException | SignatureException e ) {/* ничего не делать - токен не валиден */}
         try {
             filterChain.doFilter(request, response);
         } catch (IOException|ServletException e) {
