@@ -1,6 +1,7 @@
 package com.free.archecode.shared.security.token.refreshToken;
 
 import jakarta.persistence.*;import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class RefreshToken {
     private boolean revoked;
 
     @Column(nullable = false, name="created_at")
+    @CreationTimestamp
     private Date createdAt;
 
     @Column(nullable = false, name = "expires_at")

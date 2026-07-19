@@ -29,7 +29,7 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "user")
     private List<Project> projects;
     
     // setters
@@ -57,16 +57,6 @@ public class User {
         this.id = id;
     }
 
-    public void addProject(Project project) {
-        this.projects.add(project);
-    }
-    public void removeProject(Project project) {
-        this.projects.remove(project);
-    }
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
     // getters
     public String getEmail() {
         return email;
@@ -90,6 +80,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
     }
 
 }

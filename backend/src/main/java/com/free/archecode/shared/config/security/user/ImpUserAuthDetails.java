@@ -45,4 +45,6 @@ public class ImpUserAuthDetails implements org.springframework.security.core.use
         return user.getId();
     }
 
+    public User getUser() {return user;}
+
 }
