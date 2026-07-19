@@ -1,13 +1,13 @@
 package com.free.archecode.controller;
 
-import com.free.archecode.project.dto.response.forUser.ProjectsOfUserDtoResponse;
+import com.free.archecode.project.dto.ProjectDto;
+import com.free.archecode.project.dto.response.ProjectsOfUserDtoResponse;
 import com.free.archecode.project.service.ProjectService;
 import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/projects")
@@ -22,10 +22,20 @@ public class ProjectController {
     @GetMapping("/")
     public ResponseEntity<ProjectsOfUserDtoResponse> index()
     {
-        return ResponseEntity.ok(projectService.getProjectsOfUser(
-                (ImpUserAuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
-            )
-        );
+        try {
+            return ResponseEntity.ok(projectService.getProjectsOfUser(
+                    (ImpUserAuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+                )
+            );}
+        catch (NullPointerException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<ProjectDto> createProject(@RequestBody @Valid ProjectDto request)
+    {
+        return ResponseEntity.ok(projectService.createProject(request));
     }
 
 }

@@ -15,6 +15,9 @@ config:
       bypassProxy: ""
 
 request:
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZWNPbmUyQGpqYWFhLmFhYSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTc4NDQ2MDY0NiwiZXhwIjoxNzg0NDYxNTQ2fQ.sGhw9i4xkcx368RBlOFiGKWhPCmLHL_qN4kq6WOtoY8
   variables:
     - name: host
       value: http://127.0.0.1:8080
