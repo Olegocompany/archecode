@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 
 @Service
 @Transactional
@@ -49,10 +50,17 @@ public class AuthService {
      * @return pair jwtToken + refreshToken
      */
     public ContainerAuthDtoResponse login(LoginUserDtoRequest data) {
-        User user = userRepository.findByEmail(data.getEmail())
-                .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
+        User user;
+        if (Pattern.matches("^[а-яА-ЯеЁa-zA-Z0-9!#$%&'\"*-=+-?^_{|}~.]+@+([а-яА-Яa-zA-ZеЁ]*).([a-zA-Zа-яА-ЯёЁ]){1,10}$", data.credential())) {
+            // если это почта
+            user = userRepository.findByEmail(data.credential())
+                    .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
+        } else {
+            user = userRepository.findByUsername(data.credential())
+                    .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
+        }
 
-        if (!passwordEncoder.matches(data.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(data.password(), user.getPassword())) {
             throw new BadCredentialsException("Invalid credentials");
         }
 

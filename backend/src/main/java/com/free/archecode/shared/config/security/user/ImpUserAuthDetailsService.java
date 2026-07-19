@@ -21,10 +21,10 @@ public class ImpUserAuthDetailsService implements UserDetailsService {
 
     @Override
     @NullMarked // явное подтверждение контракта, что тут вообще ничего не может быть Null
-    public ImpUserAuthDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public ImpUserAuthDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new ImpUserAuthDetails(
-                userRepository.findByEmail(email)
-                        .orElseThrow(() -> new UsernameNotFoundException("can't find user with email: " + email))
+                userRepository.findByUsername(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("can't find user with username: " + username))
         );
     }
 

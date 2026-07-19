@@ -33,7 +33,7 @@ public class ImpUserAuthDetails implements org.springframework.security.core.use
     @Override
     @NullMarked
     public String getUsername() {
-        return user.getEmail();
+        return user.getUsername();
     }
 
     @Override

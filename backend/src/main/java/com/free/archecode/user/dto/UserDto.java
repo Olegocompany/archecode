@@ -16,6 +16,7 @@ public class UserDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String surname;
     private String email;
+    private String username;
     @JsonProperty("role_name")
     private String role;
 }
