@@ -1,6 +1,7 @@
 create table users (
     id serial primary key ,
-    email varchar(100) unique not null ,
+    email varchar(255) unique not null ,
+    username varchar(255) unique not null ,
     `name` varchar(100),
     surname varchar(100),
     password varchar(255),

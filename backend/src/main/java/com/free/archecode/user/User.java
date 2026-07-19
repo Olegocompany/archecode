@@ -20,10 +20,12 @@ public class User {
     private Long id;
 
     private String email;
+    private String username;
     private String password;
 
     private String name;
     private String surname;
+
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "role_id")
@@ -53,6 +55,10 @@ public class User {
         this.email = email;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -61,6 +67,8 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+    public String getUsername() { return username; }
 
     public Long getId() {
         return id;

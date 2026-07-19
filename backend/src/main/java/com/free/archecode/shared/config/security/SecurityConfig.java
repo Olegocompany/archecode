@@ -58,9 +58,9 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 /*
-                по идее логика такова:
+                По идее логика такова:
                 сначала запрос идет в JwtFilter, там идет проверка JWT токена и в случае аутентифицируется.
-                при аутентификации создается объект Authentication (то есть аутентифицирован)
+                При аутентификации создается объект Authentication (то есть аутентифицирован)
                  */
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // фильтр перед проверкой
                 .addFilterBefore(contentTypeFilter, JwtFilter.class); // проверка что запрос только про API
