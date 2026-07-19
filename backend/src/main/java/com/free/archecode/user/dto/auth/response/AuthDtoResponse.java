@@ -3,6 +3,6 @@ package com.free.archecode.user.dto.auth.response;
 import lombok.Data;
 
 @Data
-public class AuthResponse {
+public class AuthDtoResponse {
     private String token;
 }

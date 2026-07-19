@@ -1,10 +1,10 @@
 package com.free.archecode.controller.user;
 
 import com.free.archecode.user.dto.UserMapper;
-import com.free.archecode.user.dto.auth.request.LoginUserRequest;
-import com.free.archecode.user.dto.auth.request.RegisterUserRequest;
-import com.free.archecode.user.dto.auth.response.AuthResponse;
-import com.free.archecode.user.dto.auth.response.ContainerAuthResponse;
+import com.free.archecode.user.dto.auth.request.LoginUserDtoRequest;
+import com.free.archecode.user.dto.auth.request.RegisterUserDtoRequest;
+import com.free.archecode.user.dto.auth.response.AuthDtoResponse;
+import com.free.archecode.user.dto.auth.response.ContainerAuthDtoResponse;
 import com.free.archecode.user.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,23 +33,23 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(
-            @RequestBody @Valid RegisterUserRequest request,
+    public ResponseEntity<AuthDtoResponse> register(
+            @RequestBody @Valid RegisterUserDtoRequest request,
             HttpServletResponse httpServletResponse
     ) {
-        ContainerAuthResponse containerAuthResponse = authService.register(request);
-        setTokenToCookie(httpServletResponse, containerAuthResponse.refreshToken());
-        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthResponse.jwtToken()));
+        ContainerAuthDtoResponse containerAuthDtoResponse = authService.register(request);
+        setTokenToCookie(httpServletResponse, containerAuthDtoResponse.refreshToken());
+        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken()));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(
-            @RequestBody @Valid LoginUserRequest request,
+    public ResponseEntity<AuthDtoResponse> login(
+            @RequestBody @Valid LoginUserDtoRequest request,
             HttpServletResponse httpServletResponse
     ) {
-        ContainerAuthResponse containerAuthResponse = authService.login(request);
-        setTokenToCookie(httpServletResponse, containerAuthResponse.refreshToken());
-        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthResponse.jwtToken()));
+        ContainerAuthDtoResponse containerAuthDtoResponse = authService.login(request);
+        setTokenToCookie(httpServletResponse, containerAuthDtoResponse.refreshToken());
+        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken()));
     }
 
     @PostMapping("/refresh")
@@ -62,9 +62,9 @@ public class AuthController {
             return ResponseEntity.badRequest().build();
         }
         System.out.println(refreshToken);
-        ContainerAuthResponse containerAuthResponse = authService.refreshToken(refreshToken);
-        setTokenToCookie(httpServletResponse, containerAuthResponse.refreshToken());
-        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthResponse.jwtToken()));
+        ContainerAuthDtoResponse containerAuthDtoResponse = authService.refreshToken(refreshToken);
+        setTokenToCookie(httpServletResponse, containerAuthDtoResponse.refreshToken());
+        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken()));
     }
 
     private void setTokenToCookie(HttpServletResponse httpServletResponse, String token) {
