@@ -1,6 +1,6 @@
 package com.free.archecode.shared.config.security;
 
-import com.free.archecode.shared.config.security.jwt.JwtFilter;
+import com.free.archecode.shared.security.token.jwt.JwtFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +36,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login", "/auth/register", "/public/**").permitAll()
+                        .requestMatchers("/auth/login", "/auth/register", "/auth/refresh", "/public/**").permitAll()
                         .anyRequest().authenticated()
                 ) // разрешить какие публичные (для всех) и для входа с регистрацией
 
@@ -58,9 +58,9 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 /*
-                по идее логика такова:
+                По идее логика такова:
                 сначала запрос идет в JwtFilter, там идет проверка JWT токена и в случае аутентифицируется.
-                при аутентификации создается объект Authentication (то есть аутентифицирован)
+                При аутентификации создается объект Authentication (то есть аутентифицирован)
                  */
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // фильтр перед проверкой
                 .addFilterBefore(contentTypeFilter, JwtFilter.class); // проверка что запрос только про API

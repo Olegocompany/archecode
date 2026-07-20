@@ -1,9 +1,9 @@
-package com.free.archecode.user.dto;
+package com.free.archecode.user.dto.request;
 
 import lombok.Data;
 
 @Data
-public class UpdateUserRequest {
+public class UpdateUserDtoRequest {
     private String email;
     private String name;
     private String surname;
