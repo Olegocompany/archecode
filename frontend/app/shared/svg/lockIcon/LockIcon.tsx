@@ -1,7 +1,12 @@
 import * as React from "react";
 import { SVGProps } from "react";
 const LockIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none">
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    className="max-w-4.5 max-h-4.5"
+    fill="none"
+  >
     <g
       stroke="currentColor"
       strokeLinecap="round"
