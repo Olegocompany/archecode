@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@value blue: #0c77f8;
+
 :root {
   --white: #fafafa;
   --light-gray: #484848;
@@ -17,6 +19,9 @@
   --placeholder-hover: #888888;
   --placeholder-active: #aaaaaa;
   --error: #821616;
+  --progress: 1;
+  --r: 11;
+  --PI: 3.14;
 }
 
 @theme inline {
@@ -50,3 +55,4 @@
 *:focus-visible {
   outline: solid 4px var(--accent-lighter);
 }
+
