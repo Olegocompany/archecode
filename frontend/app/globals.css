@@ -18,7 +18,10 @@
   --input-placeholder: #666666;
   --placeholder-hover: #888888;
   --placeholder-active: #aaaaaa;
-  --error: #821616;
+  --error: #da2b2b;
+  --error-dark: #6b1919;
+  --error-light: #f24141;
+
   --progress: 1;
   --r: 11;
   --PI: 3.14;
@@ -41,6 +44,8 @@
   --color-placeholder-hover: var(--placeholder-hover);
   --color-placeholder-active: var(--placeholder-active);
   --color-error: var(--error);
+  --color-error-dark: var(--error-dark);
+  --color-error-light: var(--error-light);
 }
 
 * {
@@ -55,4 +60,3 @@
 *:focus-visible {
   outline: solid 4px var(--accent-lighter);
 }
-
