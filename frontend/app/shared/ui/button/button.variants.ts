@@ -22,7 +22,7 @@ export const buttonVariants = tv({
         "[box-shadow:0_0_12px_1px_rgba(218,43,43,0.5)] hover:[box-shadow:0_0_12px_1px_rgba(218,43,43,0.5)]" +
         " from-error to-error-dark border-error-light" +
         " hover:from-error-light hover:to-error" +
-        " active:from-error active: to-error-dark active:opacity-80" +
+        " active:from-error active:to-error-dark active:opacity-80" +
         " focus:from-error focus:to-error-dark focus:opacity-80",
       solid:
         "[box-shadow:0_0_12px_1px_rgba(48,48,48,0.5)] hover:[box-shadow:0_0_12px_1px_rgba(48,48,48,0.5)]" +
