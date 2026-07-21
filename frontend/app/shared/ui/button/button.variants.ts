@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 
 export const buttonVariants = tv({
   base:
-    "flex items-center justify-center w-full text-white box-border" +
+    "flex items-center justify-center w-full text-white box-border min-w-fit" +
     " disabled:cursor-default hover:cursor-pointer" +
     " p-5 " +
     " [box-shadow:0_0_12px_1px_rgba(2,255,11,0.3)]" +
