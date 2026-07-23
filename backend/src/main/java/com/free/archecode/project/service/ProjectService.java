@@ -2,42 +2,63 @@ package com.free.archecode.project.service;
 
 import com.free.archecode.project.Project;
 import com.free.archecode.project.ProjectRepository;
-import com.free.archecode.project.dto.ProjectDto;
 import com.free.archecode.project.dto.ProjectMapper;
-import com.free.archecode.project.dto.response.ProjectsOfUserDtoResponse;
-import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
+import com.free.archecode.project.dto.request.CreateProjectDtoRequest;
+import com.free.archecode.project.dto.request.UpdateProjectDtoRequest;
+import com.free.archecode.project.dto.response.ProjectDtoResponse;
+import com.free.archecode.project.dto.response.ProjectsDetailsOfUserDtoResponse;
+import com.free.archecode.shared.common.exceptions.NotFoundException;
+import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;
+import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;
+import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
 import com.free.archecode.user.User;
-import com.free.archecode.user.UserRepository;import org.hibernate.service.spi.ServiceException;
+import com.free.archecode.user.UserRepository;
+import com.free.archecode.utils.GitUtils;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.concurrent.TimeUnit;
-
 @Service
 @Transactional
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final ProjectMapper projectMapper;private final UserRepository userRepository;
+    private final ProjectMapper projectMapper;
+    private final UserRepository userRepository;
+    private final GitUtils gitUtils;
 
     @Autowired
-    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper, UserRepository userRepository) {
+    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper, UserRepository userRepository, GitUtils gitUtils) {
         this.projectRepository = projectRepository;
-        this.projectMapper = projectMapper;this.userRepository = userRepository;}
+        this.projectMapper = projectMapper;
+        this.userRepository = userRepository;
+        this.gitUtils = gitUtils;
+    }
 
-    public ProjectsOfUserDtoResponse getProjectsOfUser(ImpUserAuthDetails user)
+    public ProjectsDetailsOfUserDtoResponse getProjectsOfUser(ImpUserAuthDetails user)
     {
         if (user == null) {
             return null;
         }
-        return new ProjectsOfUserDtoResponse(
+        return new ProjectsDetailsOfUserDtoResponse(
                 projectRepository.findProjectsByUserId(user.getUserId())
                 .stream().map(projectMapper::toDto)
                 .toList()
         );
+    }
+
+    public ProjectDtoResponse getProjectByIdOfUserById(ImpUserAuthDetails user, Long projectId) {
+        if (user == null) {
+            throw new NullPointerException();
+        }
+        Project project = projectRepository.findProjectByIdAndUserId(projectId, user.getUserId());
+        if (project == null) {
+            throw new NotFoundException();
+        }
+        return projectMapper.toDto(project);
     }
 
     /**
@@ -48,7 +69,7 @@ public class ProjectService {
      * @return
      */
     @Transactional()
-    public ProjectDto createProject(ProjectDto data) {
+    public ProjectDtoResponse createProject(CreateProjectDtoRequest data) {
         User user;
         try {
             user = ((ImpUserAuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
@@ -62,7 +83,7 @@ public class ProjectService {
             throw new UserHasTooManyProjects();
         }
 
-        byte projectExists = isGitRepositoryExists(data.link());
+        byte projectExists = gitUtils.isGitRepositoryExists(data.link());
         if (projectExists != 0) {
             if (projectExists == 1) {
                 throw new CantFindGitProjectException("Git project not found.");
@@ -81,35 +102,12 @@ public class ProjectService {
         }
     }
 
-    /**
-     * Проверяет на существование Git-репозитория. Использует Git команду
-     * "git ls-remote --exit-code -h".
-     * Используется HTTPS ссылка.
-     * @param link
-     * @return 0 - found, 1 - not found, 2 - error (maybe in system)
-     */
-    private byte isGitRepositoryExists(String link)
-    {
-        if (!link.startsWith("https://")) {
-            link = "https://" + link;
+    public ProjectDtoResponse updateProject(ImpUserAuthDetails user, Long projectId, UpdateProjectDtoRequest data) {
+        Project project = projectRepository.findProjectByIdAndUserId(projectId, user.getUserId());
+        if (project == null) {
+            throw new NotFoundException();
         }
-
-        ProcessBuilder pb = new ProcessBuilder("git", "ls-remote", "--exit-code", "-h", link);
-        pb.redirectErrorStream(true);
-        pb.environment().put("GIT_TERMINAL_PROMPT", "0");
-
-        try {
-            Process p = pb.start();
-            p.waitFor(10, TimeUnit.SECONDS);
-
-            if (p.exitValue() == 0) {
-                return 0;
-            } else {
-                return 1;
-            }
-        } catch (Exception e) {
-            return 2;
-        }
+        return projectMapper.toDto(projectMapper.updateProject(data, project));
     }
 
 }

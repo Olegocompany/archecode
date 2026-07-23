@@ -1,10 +1,13 @@
 package com.free.archecode.controller;
 
-import com.free.archecode.project.dto.ProjectDto;
-import com.free.archecode.project.dto.response.ProjectsOfUserDtoResponse;
+import com.free.archecode.project.dto.request.CreateProjectDtoRequest;
+import com.free.archecode.project.dto.request.UpdateProjectDtoRequest;
+import com.free.archecode.project.dto.response.ProjectDtoResponse;
+import com.free.archecode.project.dto.response.ProjectsDetailsOfUserDtoResponse;
 import com.free.archecode.project.service.ProjectService;
 import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +23,7 @@ public class ProjectController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<ProjectsOfUserDtoResponse> index()
+    public ResponseEntity<ProjectsDetailsOfUserDtoResponse> index()
     {
         try {
             return ResponseEntity.ok(projectService.getProjectsOfUser(
@@ -32,10 +35,36 @@ public class ProjectController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectDtoResponse> show(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(projectService.getProjectByIdOfUserById(
+                    (ImpUserAuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal(),
+                    id
+            ));
+        } catch (NullPointerException e) {
+            return ResponseEntity.status(403).build();
+        }
+    }
+
     @PostMapping("/")
-    public ResponseEntity<ProjectDto> createProject(@RequestBody @Valid ProjectDto request)
+    public ResponseEntity<ProjectDtoResponse> createProject(@RequestBody @Valid CreateProjectDtoRequest request)
     {
-        return ResponseEntity.ok(projectService.createProject(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(projectService.createProject(request));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ProjectDtoResponse> updateProject(@PathVariable Long id, @RequestBody @Valid UpdateProjectDtoRequest request)
+    {
+        try {
+            return ResponseEntity.ok(projectService.updateProject(
+                    (ImpUserAuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal(),
+                    id,
+                    request
+            ));
+        } catch (NullPointerException e) {
+            return ResponseEntity.status(403).build();
+        }
     }
 
 }

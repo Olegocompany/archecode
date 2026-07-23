@@ -1,10 +1,10 @@
-package com.free.archecode.project.dto;
+package com.free.archecode.project.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record ProjectDto(
+public record CreateProjectDtoRequest(
         @NotNull
         @Size(min = 1)
         @Pattern(regexp = "^[a-zA-Z0-9 ()]*$", message = "only letters, nums and numbers with brackets")
@@ -15,7 +15,7 @@ public record ProjectDto(
 
         @NotNull
         @Size(min = 8)
-        @Pattern(regexp = "^(github|gitlab)\\.com\\/[a-zA-Z0-9_-]+\\/[a-z0-9\\/]+\\.git$", message = "wrong link")
+        @Pattern(regexp = "^(github|gitlab)\\.com\\/[a-zA-Z0-9_-]+\\/[a-z0-9\\/_-]+\\.git$", message = "wrong link")
         String link,
 
         @Pattern(regexp = "^([a-zA-Z0-9]+[./])*[a-zA-Z0-9]+$", message = "wrong name of branch")
