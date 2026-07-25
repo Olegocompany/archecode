@@ -17,7 +17,7 @@ config:
 request:
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb3NhdGVsT25saW5lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiaWF0IjoxNzg0OTg4MjA5LCJleHAiOjE3ODQ5ODkxMDl9.dQxtNAqK0Ddbs5v81LTOxO4DIlIoYu8mQxHJTH_3LBc
+    token: "{{token}}"
   variables:
     - name: host
       value: http://127.0.0.1:8080

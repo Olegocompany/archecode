@@ -92,6 +92,7 @@ public class ProjectService {
         }
     }
 
+    @Transactional()
     public ProjectDtoResponse updateProject(ImpUserAuthDetails userAuthDetails, Long projectId, UpdateProjectDtoRequest data) {
         Project project = projectRepository.findProjectByIdAndUserId(projectId, userAuthDetails.getUserId());
         if (project == null) {
@@ -100,6 +101,7 @@ public class ProjectService {
         return projectMapper.toDto(projectMapper.updateProject(data, project));
     }
 
+    @Transactional()
     public boolean deleteProjectById(Long projectId, Long userId) {
         Project project = projectRepository.findProjectByIdAndUserId(projectId, userId);
         if (project == null) {
