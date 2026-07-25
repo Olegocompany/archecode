@@ -1,0 +1,38 @@
+info:
+  name: Register
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{host}}/auth/register"
+  headers:
+    - name: Content-Type
+      value: application/
+      disabled: true
+  params:
+    - name: ""
+      value: ""
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Jakajadsarta",
+        "surname": "Koljimun",
+        "email": "secOne2@jjaaa.aaa",
+        "password": "password",
+        "role_name": "user"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: host
+      value: http://127.0.0.1:8080
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
