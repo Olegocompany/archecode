@@ -2,4 +2,6 @@
 cd frontend
 echo "<~~~~~~ PRE-COMMIT LINTING VIA HUSKY ~~~~~~>"
 npx lint-staged
+EXIT_CODE=$?
 echo "<~~~~~~ PRE-COMMIT LINTING DONE ~~~~~~>"
+exit $EXIT_CODE

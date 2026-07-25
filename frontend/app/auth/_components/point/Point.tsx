@@ -1,5 +1,4 @@
 "use client";
-import { ReactNode } from "react";
 
 interface PointProps {
   point: boolean;
@@ -7,7 +6,6 @@ interface PointProps {
 }
 
 export default function Point({ point, progress }: PointProps) {
-
   return (
     <svg
       width="40"
@@ -35,7 +33,10 @@ export default function Point({ point, progress }: PointProps) {
             fill="none"
             id="circle"
             className="absolute progress stroke-accent-base opacity-80 transition duration-300"
-            style={{strokeDasharray: `${progress}, ${2 * 3.14 * 11}`, strokeDashoffset: 0  }}
+            style={{
+              strokeDasharray: `${progress}, ${2 * 3.14 * 11}`,
+              strokeDashoffset: 0,
+            }}
           />
         )}
       </g>
