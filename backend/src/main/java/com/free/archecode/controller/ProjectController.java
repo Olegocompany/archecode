@@ -40,13 +40,13 @@ public class ProjectController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<ProjectDtoResponse> createProject(@RequestBody @Valid CreateProjectDtoRequest request)
+    public ResponseEntity<ProjectDtoResponse> create(@RequestBody @Valid CreateProjectDtoRequest request)
     {
         return ResponseEntity.status(HttpStatus.CREATED).body(projectService.createProject(request, userUtils.getUserAuth()));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProjectDtoResponse> updateProject(@PathVariable Long id, @RequestBody @Valid UpdateProjectDtoRequest request)
+    public ResponseEntity<ProjectDtoResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateProjectDtoRequest request)
     {
         return ResponseEntity.ok(projectService.updateProject(
                 userUtils.getUserAuth(),
@@ -54,5 +54,14 @@ public class ProjectController {
                 request
         ));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?>  delete(@PathVariable Long id)
+    {
+        projectService.deleteProjectById(id, userUtils.getUserAuth().getUserId());
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 }
