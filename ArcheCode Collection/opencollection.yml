@@ -17,7 +17,7 @@ config:
 request:
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2lkYSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTc4NDgwNzE5MCwiZXhwIjoxNzg0ODA4MDkwfQ.FQ2YZmfgHa6_BSHm2rTbOZidFNqMujX4XOCHPPlLRUQ
+    token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2lkYSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTc4NDk4Njk5MywiZXhwIjoxNzg0OTg3ODkzfQ.GAT1IDaHAMJyGIiHi0jHK1qM60K-tDr6T1rvnQvC_ec
   variables:
     - name: host
       value: http://127.0.0.1:8080

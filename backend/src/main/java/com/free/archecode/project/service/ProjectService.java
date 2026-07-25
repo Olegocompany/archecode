@@ -11,13 +11,10 @@ import com.free.archecode.shared.common.exceptions.NotFoundException;
 import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;
 import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;
 import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
-import com.free.archecode.user.User;
 import com.free.archecode.user.UserRepository;
 import com.free.archecode.utils.GitUtils;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,17 +66,9 @@ public class ProjectService {
      * @return
      */
     @Transactional()
-    public ProjectDtoResponse createProject(CreateProjectDtoRequest data) {
-        User user;
-        try {
-            user = ((ImpUserAuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
-        } catch (NullPointerException e) {
-            throw new UsernameNotFoundException(e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+    public ProjectDtoResponse createProject(CreateProjectDtoRequest data, ImpUserAuthDetails userAuthDetails) {
 
-        if (projectRepository.findProjectsByUserId(user.getId()).size() >= 3) {
+        if (projectRepository.findProjectsByUserId(userAuthDetails.getUserId()).size() >= 3) {
             throw new UserHasTooManyProjects();
         }
 
@@ -94,7 +83,7 @@ public class ProjectService {
 
         try {
             Project project = projectMapper.toEntity(data);
-            project.setUser(user);
+            project.setUser(userAuthDetails.getUser());
             projectRepository.save(project);
             return projectMapper.toDto(project);
         } catch (Exception e) {
@@ -102,8 +91,8 @@ public class ProjectService {
         }
     }
 
-    public ProjectDtoResponse updateProject(ImpUserAuthDetails user, Long projectId, UpdateProjectDtoRequest data) {
-        Project project = projectRepository.findProjectByIdAndUserId(projectId, user.getUserId());
+    public ProjectDtoResponse updateProject(ImpUserAuthDetails userAuthDetails, Long projectId, UpdateProjectDtoRequest data) {
+        Project project = projectRepository.findProjectByIdAndUserId(projectId, userAuthDetails.getUserId());
         if (project == null) {
             throw new NotFoundException();
         }

@@ -5,10 +5,10 @@ import jakarta.validation.constraints.Size;
 
 public record UpdateProjectDtoRequest(
 
-        @Pattern(regexp = "^[a-zA-Z0-9 ()]*$", message = "only letters, nums and numbers with brackets")
+        @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ0-9 ()]*$", message = "only letters (eng, rus), nums and numbers with brackets")
         String name,
 
-        @Pattern(regexp = "^[a-zA-Z0-9 ()]*$", message = "only letters, nums and numbers with brackets")
+        @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁ0-9 ()-_!?#№.,;:]*$", message = "only letters (eng, rus), nums and numbers with brackets and special symbols")
         String description,
 
         @Size(min = 8)
