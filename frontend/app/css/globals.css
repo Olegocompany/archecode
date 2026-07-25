@@ -1,6 +1,5 @@
 @import "tailwindcss";
-
-@value blue: #0c77f8;
+@import "./fonts/fonts.css";
 
 :root {
   --white: #fafafa;
@@ -21,6 +20,9 @@
   --error: #da2b2b;
   --error-dark: #6b1919;
   --error-light: #f24141;
+
+  --jost: Jost, "sans-serif";
+  --montserrat: Montserrat, "sans-serif";
 
   --progress: 1;
   --r: 11;
@@ -46,6 +48,9 @@
   --color-error: var(--error);
   --color-error-dark: var(--error-dark);
   --color-error-light: var(--error-light);
+
+  --font-jost: var(--jost);
+  --font-montserrat: var(--montserrat);
 }
 
 * {
