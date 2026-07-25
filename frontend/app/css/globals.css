@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fonts/fonts.css";
 
 :root {
   --main: #fafafa;
@@ -13,6 +14,9 @@
   --placeholder-hover: #888888;
   --placeholder-active: #aaaaaa;
   --error: #821616;
+
+  --jost: Jost, "sans-serif";
+  --montserrat: Montserrat, "sans-serif";
 }
 
 @theme inline {
@@ -28,4 +32,7 @@
   --color-placeholder-hover: var(--placeholder-hover);
   --color-placeholder-active: var(--placeholder-active);
   --color-error: var(--error);
+
+  --font-jost: var(--jost);
+  --font-montserrat: var(--montserrat);
 }
