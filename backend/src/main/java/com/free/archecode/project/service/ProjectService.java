@@ -15,6 +15,7 @@ import com.free.archecode.user.UserRepository;
 import com.free.archecode.utils.GitUtils;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -97,6 +98,15 @@ public class ProjectService {
             throw new NotFoundException();
         }
         return projectMapper.toDto(projectMapper.updateProject(data, project));
+    }
+
+    public boolean deleteProjectById(Long projectId, Long userId) {
+        Project project = projectRepository.findProjectByIdAndUserId(projectId, userId);
+        if (project == null) {
+            throw new AccessDeniedException("Access denied");
+        }
+        projectRepository.delete(project);
+        return true;
     }
 
 }

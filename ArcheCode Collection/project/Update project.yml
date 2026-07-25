@@ -6,6 +6,12 @@ info:
 http:
   method: PATCH
   url: "{{host}}/projects/1"
+  body:
+    type: json
+    data: |-
+      {
+        "description": "калл какой-та"
+      }
   auth: inherit
 
 settings:
