@@ -6,6 +6,14 @@ info:
 http:
   method: POST
   url: "{{host}}/projects/"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "кака",
+        "description": "one more try",
+        "link": "github.com/Olegocompany/archecode.git"
+      }
   auth: inherit
 
 settings:
