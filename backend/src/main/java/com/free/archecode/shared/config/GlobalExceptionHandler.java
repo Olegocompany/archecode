@@ -1,12 +1,14 @@
 package com.free.archecode.shared.config;
 
 import com.free.archecode.shared.common.exceptions.InvalidRoleException;
+import com.free.archecode.shared.common.exceptions.NotFoundException;
 import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;
 import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -53,6 +55,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.notFound().build();
     }
 
+    // 404
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNotFound(NotFoundException ex) {
+        return ResponseEntity.notFound().build();
+    }
+
     // method not allowed
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<Map<String, String>> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
@@ -66,6 +74,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MissingRequestCookieException.class)
     public ResponseEntity<Map<String, String>> handleMissingRequestCookie(MissingRequestCookieException ex) {
+        return ResponseEntity.status(403).body(new HashMap<>());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Map<String, String>> handleAccessDenied(AccessDeniedException ex) {
         return ResponseEntity.status(403).body(new HashMap<>());
     }
 

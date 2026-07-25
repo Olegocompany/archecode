@@ -1,17 +1,16 @@
 info:
-  name: Login
+  name: Update project
   type: http
-  seq: 3
+  seq: 4
 
 http:
-  method: POST
-  url: "{{host}}/auth/login"
+  method: PATCH
+  url: "{{host}}/projects/2"
   body:
     type: json
     data: |-
       {
-        "credential": "secOne2@jjaaa.aaa",
-        "password": "password"
+        "description": "калл какой-та"
       }
   auth: inherit
 
