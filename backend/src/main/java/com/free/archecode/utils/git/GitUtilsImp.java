@@ -1,16 +1,18 @@
-package com.free.archecode.utils;
+package com.free.archecode.utils.git;
 
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class GitUtils {
+public class GitUtilsImp implements GitUtils {
 
     /**
      * Проверяет на существование Git-репозитория. Использует Git команду
-     * "git ls-remote --exit-code -h".
+     * "git ls-remote --exit-code -h" силами ОС.
      * Используется HTTPS ссылка.
+     * Можно подставить "https://" самому, можно и не подставлять.
+     * Правильность ссылки (структура, ее символы и т.д.) не проверяются.
      * @param link
      * @return 0 - found, 1 - not found, 2 - error (maybe in system)
      */

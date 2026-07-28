@@ -1,7 +1,7 @@
 package com.free.archecode.shared.security.token.jwt;
 
 
-import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
+import com.free.archecode.shared.config.security.user.UserAuthDetailsImp;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -28,7 +28,7 @@ public class JwtService {
      * @param userDetails
      * @return
      */
-    public String generateToken(ImpUserAuthDetails userDetails) {
+    public String generateToken(UserAuthDetailsImp userDetails) {
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .claim("roles", userDetails.getAuthorities())

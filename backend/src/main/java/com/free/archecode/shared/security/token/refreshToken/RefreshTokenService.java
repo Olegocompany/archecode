@@ -2,8 +2,8 @@ package com.free.archecode.shared.security.token.refreshToken;
 
 import com.free.archecode.shared.common.exceptions.refreshToken.TokenExpiredException;
 import com.free.archecode.shared.common.exceptions.refreshToken.TokenRevokedException;
-import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
-import com.free.archecode.shared.config.security.user.ImpUserAuthDetailsService;import org.apache.commons.codec.digest.DigestUtils;
+import com.free.archecode.shared.config.security.user.UserAuthDetailsImp;
+import com.free.archecode.shared.config.security.user.UserAuthDetailsServiceImp;import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.service.spi.ServiceException;import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,14 +23,14 @@ import java.util.UUID;
 public class RefreshTokenService {
 
     private final RefreshTokenRepository tokenRepository;
-    private final ImpUserAuthDetailsService impUserAuthDetailsService;
+    private final UserAuthDetailsServiceImp userAuthDetailsServiceImp;
 
     @Value("${jwt.refresh.expiration}")
     private long expiration;
 
-    public RefreshTokenService(RefreshTokenRepository refreshTokenRepository,  ImpUserAuthDetailsService impUserAuthDetailsService) {
+    public RefreshTokenService(RefreshTokenRepository refreshTokenRepository,  UserAuthDetailsServiceImp userAuthDetailsServiceImp) {
         this.tokenRepository = refreshTokenRepository;
-        this.impUserAuthDetailsService = impUserAuthDetailsService;
+        this.userAuthDetailsServiceImp = userAuthDetailsServiceImp;
     }
 
     /**
@@ -40,7 +40,7 @@ public class RefreshTokenService {
      * @return
      */
     @Transactional
-    public String generateToken(ImpUserAuthDetails userDetails) throws ServiceException {
+    public String generateToken(UserAuthDetailsImp userDetails) throws ServiceException {
         Long userId = userDetails.getUserId();
         String token = UUID.randomUUID().toString();
         String sha256hex = DigestUtils.sha256Hex(token);
@@ -71,7 +71,7 @@ public class RefreshTokenService {
      */
     @Transactional
     @Nullable
-    public ImpUserAuthDetails getUserByToken(String token) {
+    public UserAuthDetailsImp getUserByToken(String token) {
         String tokenHash = DigestUtils.sha256Hex(token);
         Optional<RefreshToken> tokenObj = tokenRepository.findByTokenHash(tokenHash);
         if (!tokenObj.isPresent()) {
@@ -91,7 +91,7 @@ public class RefreshTokenService {
         try {
             rt.setRevoked(true);
             tokenRepository.save(rt);
-            ImpUserAuthDetails user = impUserAuthDetailsService.loadUserByUserId(rt.getUserId());
+            UserAuthDetailsImp user = userAuthDetailsServiceImp.loadUserByUserId(rt.getUserId());
             return user;
         } catch (UsernameNotFoundException e) {
             return null;

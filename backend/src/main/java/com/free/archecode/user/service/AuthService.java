@@ -2,7 +2,7 @@ package com.free.archecode.user.service;
 
 import com.free.archecode.role.RoleRepository;
 import com.free.archecode.shared.common.exceptions.InvalidRoleException;
-import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
+import com.free.archecode.shared.config.security.user.UserAuthDetailsImp;
 import com.free.archecode.shared.security.token.jwt.JwtService;
 import com.free.archecode.shared.security.token.refreshToken.RefreshTokenService;
 import com.free.archecode.user.User;
@@ -41,7 +41,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(roleRepository.findByName(data.getRole_name()));
         userRepository.save(user);
-        return generateTokenPair(new ImpUserAuthDetails(user));
+        return generateTokenPair(new UserAuthDetailsImp(user));
     }
 
     /**
@@ -64,7 +64,7 @@ public class AuthService {
             throw new BadCredentialsException("Invalid credentials");
         }
 
-        return generateTokenPair(new ImpUserAuthDetails(user));
+        return generateTokenPair(new UserAuthDetailsImp(user));
     }
 
     /**
@@ -73,7 +73,7 @@ public class AuthService {
      * @return pair jwtToken + refreshToken
      */
     public ContainerAuthDtoResponse refreshToken(String refreshToken) {
-        ImpUserAuthDetails user = refreshTokenService.getUserByToken(refreshToken);
+        UserAuthDetailsImp user = refreshTokenService.getUserByToken(refreshToken);
         if (user == null) {
             throw new BadCredentialsException("Invalid token");
         }
@@ -94,7 +94,7 @@ public class AuthService {
      * @param user
      * @return ContainerAuthResponse (jwtToken, refreshToken)
      */
-    private ContainerAuthDtoResponse generateTokenPair(ImpUserAuthDetails user) {
+    private ContainerAuthDtoResponse generateTokenPair(UserAuthDetailsImp user) {
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = refreshTokenService.generateToken(user);
 
