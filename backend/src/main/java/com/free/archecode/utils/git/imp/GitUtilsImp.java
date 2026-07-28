@@ -1,5 +1,6 @@
-package com.free.archecode.utils.git;
+package com.free.archecode.utils.git.imp;
 
+import com.free.archecode.utils.git.GitUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;

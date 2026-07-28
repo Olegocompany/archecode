@@ -5,7 +5,7 @@ import com.free.archecode.project.dto.request.UpdateProjectDtoRequest;
 import com.free.archecode.project.dto.response.ProjectDtoResponse;
 import com.free.archecode.project.dto.response.ProjectsDetailsOfUserDtoResponse;
 import com.free.archecode.project.service.ProjectService;
-import com.free.archecode.utils.user.UserUtilsImp;
+import com.free.archecode.utils.user.UserAuthUtils;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class ProjectController {
 
     private final ProjectService projectService;
-    private final UserUtilsImp userUtils;
+    private final UserAuthUtils userUtils;
 
-    public ProjectController(ProjectService projectService, UserUtilsImp userUtils) {
+    public ProjectController(ProjectService projectService, UserAuthUtils userUtils) {
         this.projectService = projectService;
         this.userUtils = userUtils;
     }

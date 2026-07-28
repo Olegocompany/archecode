@@ -1,9 +1,10 @@
-package com.free.archecode.shared.config.security.user;
+package com.free.archecode.shared.config.security.user.imps;
 
 /*
 Конкретно этот - будет вызываться DaoAuthProvider-ом для всяческих проверок и выгрузок пользователя
  */
 
+import com.free.archecode.shared.config.security.user.UserAuthDetailsService;
 import com.free.archecode.user.User;
 import com.free.archecode.user.UserRepository;
 import lombok.AllArgsConstructor;

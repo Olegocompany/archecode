@@ -1,4 +1,4 @@
-package com.free.archecode.project.service;
+package com.free.archecode.project.service.imp;
 
 import com.free.archecode.project.Project;
 import com.free.archecode.project.ProjectRepository;
@@ -7,10 +7,11 @@ import com.free.archecode.project.dto.request.CreateProjectDtoRequest;
 import com.free.archecode.project.dto.request.UpdateProjectDtoRequest;
 import com.free.archecode.project.dto.response.ProjectDtoResponse;
 import com.free.archecode.project.dto.response.ProjectsDetailsOfUserDtoResponse;
+import com.free.archecode.project.service.ProjectService;
 import com.free.archecode.shared.common.exceptions.NotFoundException;
 import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;
 import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;
-import com.free.archecode.shared.config.security.user.UserAuthDetailsImp;
+import com.free.archecode.shared.config.security.user.UserAuthDetails;
 import com.free.archecode.utils.git.GitUtils;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class ProjectServiceImp implements ProjectService {
         );
     }
 
-    public ProjectDtoResponse getProjectByIdOfUserById(UserAuthDetailsImp user, Long projectId) {
+    public ProjectDtoResponse getProjectByIdOfUserById(UserAuthDetails user, Long projectId) {
         if (user == null) {
             throw new NullPointerException();
         }
@@ -64,7 +65,7 @@ public class ProjectServiceImp implements ProjectService {
      * @return
      */
     @Transactional()
-    public ProjectDtoResponse createProject(CreateProjectDtoRequest data, UserAuthDetailsImp userAuthDetails) {
+    public ProjectDtoResponse createProject(CreateProjectDtoRequest data, UserAuthDetails userAuthDetails) {
 
         if (projectRepository.findProjectsByUserId(userAuthDetails.getUserId()).size() >= 3) {
             throw new UserHasTooManyProjects();
@@ -90,7 +91,7 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Transactional()
-    public ProjectDtoResponse updateProject(UserAuthDetailsImp userAuthDetails, Long projectId, UpdateProjectDtoRequest data) {
+    public ProjectDtoResponse updateProject(UserAuthDetails userAuthDetails, Long projectId, UpdateProjectDtoRequest data) {
         Project project = projectRepository.findProjectByIdAndUserId(projectId, userAuthDetails.getUserId());
         if (project == null) {
             throw new NotFoundException();

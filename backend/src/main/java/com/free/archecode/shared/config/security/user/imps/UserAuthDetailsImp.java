@@ -1,5 +1,6 @@
-package com.free.archecode.shared.config.security.user;
+package com.free.archecode.shared.config.security.user.imps;
 
+import com.free.archecode.shared.config.security.user.UserAuthDetails;
 import com.free.archecode.user.User;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.CredentialsContainer;
