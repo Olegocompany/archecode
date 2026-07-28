@@ -1,19 +1,21 @@
-package com.free.archecode.shared.config.security.user;
+package com.free.archecode.shared.config.security.user.imps;
 
+import com.free.archecode.shared.config.security.user.UserAuthDetails;
 import com.free.archecode.user.User;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public class ImpUserAuthDetails implements org.springframework.security.core.userdetails.UserDetails, CredentialsContainer {
+public class UserAuthDetailsImp implements UserDetails, CredentialsContainer, UserAuthDetails {
 
     private final User user;
 
-    public ImpUserAuthDetails(User user) {
+    public UserAuthDetailsImp(User user) {
         this.user = user;
     }
 
@@ -25,9 +27,12 @@ public class ImpUserAuthDetails implements org.springframework.security.core.use
         );
     }
 
+    /**
+     * @return hash of password, not password itself.
+     */
     @Override
     public String getPassword() {
-        return user.getPassword(); //хэш
+        return user.getPassword();
     }
 
     @Override
