@@ -1,13 +1,7 @@
 import Image from "next/image";
-import { MenuButton } from "@/app/shared/ui/menu-button";
-import {
-  AvatarIcon,
-  ExitIcon,
-  LockIcon,
-  PlusIcon,
-  TrashcanIcon,
-} from "@/app/shared/svg";
 import { LogoutButton } from "@/app/shared/ui/logout-button";
+import { Avatar, Exit, OpenEye } from "@/app/shared/icons";
+import { MenuButton } from "@/app/shared/ui/menu-button";
 
 export default function Home() {
   return (
@@ -26,10 +20,9 @@ export default function Home() {
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the page.tsx file.
           </h1>
-          <MenuButton variant="grow" text="asdasdf" bgColor="black">
-            <ExitIcon />
+          <MenuButton text={"sdfsdfg"} bgColor={"red"}>
+            <Exit />
           </MenuButton>
-          <LogoutButton />
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Looking for a starting point or more instructions? Head over to{" "}
             <a

@@ -12,7 +12,9 @@
     "lint:ts:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix",
     "test": "vitest",
     "test:run": "vitest run",
-    "prepare": "git config core.hooksPath frontend/.husky"
+    "prepare": "git config core.hooksPath frontend/.husky",
+    "generate:icons": "npx @svgr/cli --typescript --out-dir app/shared/icons public/icons",
+    "predev": "npm run generate:icons"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -30,6 +32,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@svgr/cli": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
