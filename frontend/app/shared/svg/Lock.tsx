@@ -9,7 +9,7 @@ const SvgLock = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <g
-      stroke="#FAFAFA"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

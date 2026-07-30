@@ -2,7 +2,7 @@ import { CloseEye, OpenEye } from "@/app/shared/svg";
 
 interface EyeProps {
   state?: boolean;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 function Eye({ handleClick, state = true }: EyeProps) {
@@ -11,12 +11,12 @@ function Eye({ handleClick, state = true }: EyeProps) {
       {state ? (
         <OpenEye
           onClick={handleClick}
-          className=" max-w-6 max-h-4 cursor-pointer text-primary-dark  hover:text-lighter-gray active:text-input-placeholder transition duration-300"
+          className=" min-w-6 max-h-4 cursor-pointer text-primary-dark  hover:text-lighter-gray active:text-input-placeholder transition duration-300"
         />
       ) : (
         <CloseEye
           onClick={handleClick}
-          className=" max-w-6 max-h-3 cursor-pointer text-primary-dark  hover:text-lighter-gray active:text-input-placeholder transition duration-300"
+          className=" min-w-6 max-h-3 cursor-pointer text-primary-dark  hover:text-lighter-gray active:text-input-placeholder transition duration-300"
         />
       )}
     </>

@@ -1,7 +1,10 @@
-export * from "./openEye";
-export * from "./closeEye";
-export * from "./lockIcon";
-export * from "./trashcanIcon";
-export * from "./avatarIcon";
-export * from "./exitIcon";
-export * from "./plusIcon";
+export { default as Avatar } from "./Avatar";
+export { default as Cancel } from "./Cancel";
+export { default as CloseEye } from "./CloseEye";
+export { default as Cross } from "./Cross";
+export { default as Exit } from "./Exit";
+export { default as Lock } from "./Lock";
+export { default as OpenEye } from "./OpenEye";
+export { default as Plus } from "./Plus";
+export { default as Save } from "./Save";
+export { default as Trashcan } from "./Trashcan";

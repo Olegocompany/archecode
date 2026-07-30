@@ -13,8 +13,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "prepare": "git config core.hooksPath frontend/.husky",
-    "generate:icons": "npx @svgr/cli --typescript --out-dir app/shared/icons public/icons",
-    "predev": "npm run generate:icons"
+    "generate:icons": "npx @svgr/cli --typescript --out-dir app/shared/svg public/icons"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
