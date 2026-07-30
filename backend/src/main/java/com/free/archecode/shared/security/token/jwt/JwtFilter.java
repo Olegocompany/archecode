@@ -1,7 +1,8 @@
 package com.free.archecode.shared.security.token.jwt;
 
-import com.free.archecode.shared.config.security.user.ImpUserAuthDetails;
-import com.free.archecode.shared.config.security.user.ImpUserAuthDetailsService;
+import com.free.archecode.shared.config.security.user.imps.UserAuthDetailsImp;
+import com.free.archecode.shared.config.security.user.imps.UserAuthDetailsServiceImp;
+import com.free.archecode.shared.security.token.jwt.serviceImp.JwtServiceImp;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
@@ -23,8 +24,8 @@ import java.io.IOException;
 @AllArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private JwtService jwtService;
-    private ImpUserAuthDetailsService userDetailsService;
+    private JwtServiceImp jwtService;
+    private UserAuthDetailsServiceImp userDetailsService;
 
     @Override
     @NullMarked
@@ -44,7 +45,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String username = jwtService.extractUsername(token);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                ImpUserAuthDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UserAuthDetailsImp userDetails = userDetailsService.loadUserByUsername(username);
 
                 if (jwtService.validateToken(token, userDetails)) {
                     /*

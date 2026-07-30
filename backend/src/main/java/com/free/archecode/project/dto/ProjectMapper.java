@@ -2,17 +2,19 @@ package com.free.archecode.project.dto;
 
 
 import com.free.archecode.project.Project;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import com.free.archecode.project.dto.request.CreateProjectDtoRequest;
+import com.free.archecode.project.dto.request.UpdateProjectDtoRequest;
+import com.free.archecode.project.dto.response.ProjectDtoResponse;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
-    ProjectDto toDto(Project project);
+    ProjectDtoResponse toDto(Project project);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)
-    Project toEntity(ProjectDto dto);
+    Project toEntity(CreateProjectDtoRequest dto);
 
-    void updateProject(ProjectDto dto, @MappingTarget Project project);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE) // ignore NULL variables (patch-like)
+    Project updateProject(UpdateProjectDtoRequest dto, @MappingTarget Project project);
 }
