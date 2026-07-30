@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 interface MenuButtonProps {
-  variant?: "default" | "grow" | "icon";
+  variant: "default" | "grow" | "icon";
   handleClick?: () => void;
   text?: string;
   children?: string;
