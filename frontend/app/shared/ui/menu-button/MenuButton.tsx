@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 
 interface MenuButtonProps {
-  variant?: "grow" | "icon";
+  variant?: "default" | "grow" | "icon";
   handleClick?: () => void;
   text?: string;
-  children?: React.ReactNode;
+  children?: string;
   bgColor?: "green" | "red" | "gray";
 }
 
@@ -56,7 +56,7 @@ function MenuButton({
             {text}
           </p>
         </div>
-      ) : (
+      ) : variant === "default" ? (
         <div>
           <div
             className="flex items-center justify-center gap-4 px-5 py-6 bg-gray rounded-[20px]
@@ -71,7 +71,7 @@ function MenuButton({
             </p>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
