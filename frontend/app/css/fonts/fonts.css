@@ -1,0 +1,19 @@
+@font-face {
+  font-family: Jost;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("Jost"),
+    url("./Jost/Jost-VariableFont_wght.woff2") format("woff2"),
+    url("./Jost/Jost-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("Montserrat"),
+    url("./Montserrat/Montserrat-VariableFont_wght.woff2") format("woff2"),
+    url("./Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
+}

@@ -1,13 +1,22 @@
 package com.free.archecode.shared.config;
 
-import com.free.archecode.shared.exceptions.InvalidRoleException;
+import com.free.archecode.shared.common.exceptions.InvalidRoleException;
+import com.free.archecode.shared.common.exceptions.NotFoundException;
+import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;
+import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;
+import org.hibernate.service.spi.ServiceException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestCookieException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,8 +49,36 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
+    // controller that can handle this request not found
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNoResourceFound(NoResourceFoundException ex) {
+        return ResponseEntity.notFound().build();
+    }
+
+    // 404
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNotFound(NotFoundException ex) {
+        return ResponseEntity.notFound().build();
+    }
+
+    // method not allowed
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Map<String, String>> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Map<String, String>> handleCredentials(BadCredentialsException ex) {
+        return ResponseEntity.status(403).body(new HashMap<>());
+    }
+
+    @ExceptionHandler(MissingRequestCookieException.class)
+    public ResponseEntity<Map<String, String>> handleMissingRequestCookie(MissingRequestCookieException ex) {
+        return ResponseEntity.status(403).body(new HashMap<>());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Map<String, String>> handleAccessDenied(AccessDeniedException ex) {
         return ResponseEntity.status(403).body(new HashMap<>());
     }
 
@@ -58,6 +95,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest().body(Map.of(prefix, "Invalid JSON"));
+    }
+
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<Map<String, String>> handleServiceException(ServiceException ex) {
+        return ResponseEntity.internalServerError().body(Map.of(prefix, "Internal Server Error"));
+    }
+
+    @ExceptionHandler(CantFindGitProjectException.class)
+    public ResponseEntity<Map<String, String>> handleCantFindGitProjectException(CantFindGitProjectException ex) {
+        return ResponseEntity.badRequest().body(Map.of(prefix, ex.getMessage()));
+    }
+
+    @ExceptionHandler(UserHasTooManyProjects.class)
+    public ResponseEntity<Map<String, String>> handleUserHasTooManyProjects(UserHasTooManyProjects ex) {
+        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(Map.of(prefix, ex.getMessage()));
     }
 
     // все остальное

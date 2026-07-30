@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@import "./fonts/fonts.css";
+
+:root {
+  --white: #fafafa;
+  --light-gray: #484848;
+  --gray: #242424;
+  --dark-gray: #121212;
+  --lighter-gray: #525252;
+  --primary-dark: #404040;
+  --accent-base: #56ae63;
+  --accent-light: #54ca58;
+  --accent-lighter: #55f05b;
+  --accent-dark: #196b1c;
+  --auxiliary: #63eddc;
+  --input-outline: #323232;
+  --input-placeholder: #666666;
+  --placeholder-hover: #888888;
+  --placeholder-active: #aaaaaa;
+  --error: #da2b2b;
+  --error-dark: #6b1919;
+  --error-light: #f24141;
+
+  --jost: Jost, "sans-serif";
+  --montserrat: Montserrat, "sans-serif";
+
+  --progress: 1;
+  --r: 11;
+  --PI: 3.14;
+}
+
+@theme inline {
+  --color-white: var(--white);
+  --color-light-gray: var(--light-gray);
+  --color-gray: var(--gray);
+  --color-dark-gray: var(--dark-gray);
+  --color-lighter-gray: var(--lighter-gray);
+  --color-primary-dark: var(--primary-dark);
+  --color-accent-base: var(--accent-base);
+  --color-accent-light: var(--accent-light);
+  --color-accent-lighter: var(--accent-lighter);
+  --color-accent-dark: var(--accent-dark);
+  --color-auxiliary: var(--auxiliary);
+  --color-input-outline: var(--input-outline);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-placeholder-hover: var(--placeholder-hover);
+  --color-placeholder-active: var(--placeholder-active);
+  --color-error: var(--error);
+  --color-error-dark: var(--error-dark);
+  --color-error-light: var(--error-light);
+
+  --font-jost: var(--jost);
+  --font-montserrat: var(--montserrat);
+}
+
+* {
+  outline-color: transparent;
+  outline-offset: 3px;
+}
+
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: solid 4px var(--accent-lighter);
+}

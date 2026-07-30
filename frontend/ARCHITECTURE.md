@@ -199,18 +199,18 @@ frontend/
 
 ## Соглашения по именованию
 
-| Сущность          | Стиль                       | Пример                         |
-| ----------------- | --------------------------- | ------------------------------ |
-| Компоненты        | PascalCase                  | `Input`, `UsersTable`          |
-| Файлы компонентов | kebab-case                  | `input.tsx`, `users-table.tsx` |
-| Файлы вариантов   | kebab-case + `.variants`    | `input.variants.ts`            |
-| Хуки              | camelCase + `use`           | `useDebounce`, `useAuthStore`  |
-| Файлы хуков       | kebab-case + `use-`         | `use-debounce.ts`              |
-| Сторы             | camelCase + `use` + `Store` | `useThemeStore`                |
-| Файлы сторов      | kebab-case + `use-`         | `use-theme-store.ts`           |
-| Типы              | PascalCase                  | `UserResponse`, `ApiError`     |
-| Файлы типов       | kebab-case                  | `user.ts`, `api.ts`            |
-| Утилиты           | camelCase                   | `formatDate`, `cn`             |
-| Файлы утилит      | kebab-case                  | `format-date.ts`, `cn.ts`      |
-| Папки маршрутов   | kebab-case                  | `profile/settings`             |
-| Тесты             | `<name>.test.ts(x)`         | `input.test.tsx`               |
+| Сущность          | Стиль                       | Пример                        |
+| ----------------- | --------------------------- | ----------------------------- |
+| Компоненты        | camelCase                   | `input`, `userTable`          |
+| Файлы компонентов | PascalCase                  | `Input.tsx`, `UsersTable.tsx` |
+| Файлы вариантов   | PascalCase + `.variants`    | `Input.variants.ts`           |
+| Хуки              | camelCase + `use`           | `useDebounce`, `useAuthStore` |
+| Файлы хуков       | kebab-case + `use-`         | `use-debounce.ts`             |
+| Сторы             | camelCase + `use` + `Store` | `useThemeStore`               |
+| Файлы сторов      | kebab-case + `use-`         | `use-theme-store.ts`          |
+| Типы              | PascalCase                  | `UserResponse`, `ApiError`    |
+| Файлы типов       | kebab-case                  | `user.ts`, `api.ts`           |
+| Утилиты           | camelCase                   | `formatDate`, `cn`            |
+| Файлы утилит      | kebab-case                  | `format-date.ts`, `cn.ts`     |
+| Папки маршрутов   | kebab-case                  | `profile/settings`            |
+| Тесты             | `<name>.test.ts(x)`         | `input.test.tsx`              |

@@ -1,0 +1,23 @@
+info:
+  name: create project
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{host}}/projects/"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "кака",
+        "description": "one more try",
+        "link": "github.com/Olegocompany/archecode.git"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

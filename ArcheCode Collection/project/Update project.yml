@@ -1,0 +1,21 @@
+info:
+  name: Update project
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{host}}/projects/2"
+  body:
+    type: json
+    data: |-
+      {
+        "description": "калл какой-то"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

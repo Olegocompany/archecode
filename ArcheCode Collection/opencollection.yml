@@ -1,0 +1,29 @@
+opencollection: 1.0.0
+
+info:
+  name: ArcheCode Collection
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  auth:
+    type: bearer
+    token: "{{token}}"
+  variables:
+    - name: host
+      value: http://127.0.0.1:8080
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
