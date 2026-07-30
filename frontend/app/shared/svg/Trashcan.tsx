@@ -9,7 +9,7 @@ const SvgTrashcan = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <g
-      stroke="#DA2B2B"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

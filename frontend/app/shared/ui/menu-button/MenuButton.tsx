@@ -63,7 +63,7 @@ function MenuButton({
         hover:bg-input-outline hover:drop-shadow-[0_0_60px_rgba(84,202,88,0.25)]
         active:opacity-50"
           >
-            <div className="drop-shadow-[0_4px_4px_rgba(0,0,0,0.25),0_0_6px_rgba(0,185,6,0.75)]">
+            <div className="text-accent-base drop-shadow-[0_4px_4px_rgba(0,0,0,0.25),0_0_6px_rgba(0,185,6,0.75)]">
               {children}
             </div>
             <p className="text-accent-light text-shadow-[0_0_6px_rgba(0,185,6,0.75)]">
