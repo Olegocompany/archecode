@@ -8,5 +8,7 @@ mvnw
 mvnw.cmd
 structure.md
 src
+
+# IDE, code redactors
 .vscode
 .idea

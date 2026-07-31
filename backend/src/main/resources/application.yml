@@ -1,4 +1,4 @@
-debug: false
+debug: ${DEBUG_ENABLED}
 spring:
   application:
     name: archecode
@@ -8,18 +8,21 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: validate
-    show-sql: true
+    show-sql: ${DEBUG_ENABLED}
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://database:3306/db
-    username: root
-    password: password!
+    url: ${DATABASE_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  config:
+    import: optional:file:.env[.properties]
+
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 jwt:
-  secret: secret-key-min-32-symbols-but-better-256-so-please-be-careful-with-this
-  expiration: 900000
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION}
   refresh:
-    expiration: 259200000
+    expiration: ${REFRESH_EXPIRATION}
