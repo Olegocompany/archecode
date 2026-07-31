@@ -1,0 +1,12 @@
+.env.example
+.gitattributes
+.gitignore
+AGENTS.md
+README.md
+HELP.md
+mvnw
+mvnw.cmd
+structure.md
+src
+.vscode
+.idea

@@ -1,0 +1,4 @@
+name: security
+variables:
+  - secret: true
+    name: token

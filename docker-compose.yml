@@ -1,9 +1,14 @@
 volumes:
   db-dev:
 
+networks:
+  databased:
+    driver: bridge
+
 services:
   database:
     image: mysql
+    container_name: archecode-mysql-database
     restart: on-failure
     ports:
       - "3307:3306"
@@ -14,3 +19,6 @@ services:
       MYSQL_PASSWORD: ${PASSWORD:-password}
     volumes:
       - db-dev:/var/lib/mysql
+    networks:
+      - databased
+

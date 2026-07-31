@@ -2,13 +2,15 @@ package com.free.archecode.shared.security.token.refreshToken.serviceImp;
 
 import com.free.archecode.shared.common.exceptions.refreshToken.TokenExpiredException;
 import com.free.archecode.shared.common.exceptions.refreshToken.TokenRevokedException;
+import com.free.archecode.shared.config.security.user.UserAuthDetails;
 import com.free.archecode.shared.config.security.user.imps.UserAuthDetailsImp;
 import com.free.archecode.shared.config.security.user.imps.UserAuthDetailsServiceImp;
 import com.free.archecode.shared.security.token.refreshToken.RefreshToken;
 import com.free.archecode.shared.security.token.refreshToken.RefreshTokenRepository;
 import com.free.archecode.shared.security.token.refreshToken.RefreshTokenService;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.hibernate.service.spi.ServiceException;import org.jspecify.annotations.Nullable;
+import org.hibernate.service.spi.ServiceException;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -44,7 +46,7 @@ public class RefreshTokenServiceImp implements RefreshTokenService {
      * @return
      */
     @Transactional
-    public String generateToken(UserAuthDetailsImp userDetails) throws ServiceException {
+    public String generateToken(UserAuthDetails userDetails) throws ServiceException {
         Long userId = userDetails.getUserId();
         String token = UUID.randomUUID().toString();
         String sha256hex = DigestUtils.sha256Hex(token);
@@ -75,7 +77,7 @@ public class RefreshTokenServiceImp implements RefreshTokenService {
      */
     @Transactional
     @Nullable
-    public UserAuthDetailsImp getUserByToken(String token) {
+    public UserAuthDetails getUserByToken(String token) {
         String tokenHash = DigestUtils.sha256Hex(token);
         Optional<RefreshToken> tokenObj = tokenRepository.findByTokenHash(tokenHash);
         if (!tokenObj.isPresent()) {

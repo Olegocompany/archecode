@@ -26,6 +26,8 @@ public class User {
     private String name;
     private String surname;
 
+    private String imageLink;
+
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "role_id")
@@ -63,6 +65,8 @@ public class User {
         this.id = id;
     }
 
+    public void setImageLink(String imageLink) { this.imageLink = imageLink; }
+
     // getters
     public String getEmail() {
         return email;
@@ -93,5 +97,7 @@ public class User {
     public List<Project> getProjects() {
         return projects;
     }
+
+    public String getImageLink() { return imageLink; }
 
 }
