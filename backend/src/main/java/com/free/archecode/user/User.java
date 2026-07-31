@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"email"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"})
 )
 @ToString(exclude = {"role", "projects"})
 public class User {
@@ -18,8 +18,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Identity указываем, чтобы работало как автоинкремент
     private Long id;
-
+    
+    @Column(unique = true)
     private String email;
+
+    @Column(unique = true)
     private String username;
     private String password;
 

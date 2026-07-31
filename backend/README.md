@@ -4,19 +4,6 @@ Spring Boot application
 
 ---
 
-## Требования
-
-- Java 26 (JDK)
-- Maven (или включенный `mvnw wrapper`)
-- MySQL 8.0+
-
-Убедитесь, что `JAVA_HOME` установлена правильно:
-```shell
-java -version
-```
-
----
-
 ## Запуск
 
 ### Заполните dotenv
@@ -49,3 +36,11 @@ mvn spring-boot:run
 ```
 
 Запускаемый JAR будет расположен в `target/`
+
+# Docker
+
+Для работы с докером нужно упаковать без тестов
+
+```shell
+./mvnw clean package -DskipTests
+```
