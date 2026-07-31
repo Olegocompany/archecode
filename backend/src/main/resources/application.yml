@@ -7,14 +7,7 @@ spring:
   jpa:
     generate-ddl: false
     hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-        hbm2ddl:
-          auto: none
-        temp:
-          use_jdbc_metadata_defaults: false
+      ddl-auto: validate
     show-sql: true
   main:
     allow-bean-definition-overriding: true
@@ -22,13 +15,6 @@ spring:
     url: jdbc:mysql://database:3306/db
     username: root
     password: password!
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    initialize: false
-    initialSize: 0
-
-  sql:
-    init:
-      continue-on-error: true
 server:
   port: 8080
 
