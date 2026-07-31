@@ -17,17 +17,15 @@ RUN $JAVA_HOME/bin/jlink \
 
 FROM alpine:3.24.1
 ARG BUILD_PATH=/opt/build
+
+RUN apk add --no-cache git
+
 ENV JAVA_HOME=/opt/jdk
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
-
-# это для debian slim
-#RUN groupadd --gid 1000 spring-app \
-#    && useradd --uid 1000 --gid spring-app --create-home spring-app
-
 RUN addgroup -g 1000 spring-app && adduser -D -u 1000 -G spring-app spring-app
-
 USER spring-app:spring-app
+
 WORKDIR /opt/workspace
 
 
