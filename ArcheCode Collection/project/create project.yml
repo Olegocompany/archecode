@@ -10,8 +10,8 @@ http:
     type: json
     data: |-
       {
-        "name": "кака",
-        "description": "one more try",
+        "name": "какая",
+        "description": "one more tryууу",
         "link": "github.com/Olegocompany/archecode.git"
       }
   auth: inherit
