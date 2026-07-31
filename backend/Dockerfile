@@ -1,4 +1,4 @@
-FROM eclipse-temurin:26 AS builder
+FROM eclipse-temurin:26-jdk-alpine AS builder
 ENV RELEASE=26
 
 WORKDIR /opt/build
@@ -15,13 +15,17 @@ RUN $JAVA_HOME/bin/jlink \
 
 # FROM bellsoft/liberica-openjre-debian:latest-cds
 
-FROM debian:buster-slim
+FROM alpine:3.24.1
 ARG BUILD_PATH=/opt/build
 ENV JAVA_HOME=/opt/jdk
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
-RUN groupadd --gid 1000 spring-app \
-    && useradd --uid 1000 --gid spring-app --shell /bin/bash --create-home spring-app
+
+# это для debian slim
+#RUN groupadd --gid 1000 spring-app \
+#    && useradd --uid 1000 --gid spring-app --create-home spring-app
+
+RUN addgroup -g 1000 spring-app && adduser -D -u 1000 -G spring-app spring-app
 
 USER spring-app:spring-app
 WORKDIR /opt/workspace
