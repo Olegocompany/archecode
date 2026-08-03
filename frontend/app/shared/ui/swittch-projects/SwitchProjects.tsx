@@ -27,6 +27,7 @@ function SwitchProjects({
             className="flex group justify-between bg-input-outline rounded-[30px] font-montserrat drop-shadow-[0_4_10px_rgba(0_0_0/0.05)] w-full transition-all duration-300
                         hover:bg-light-gray hover:drop-shadow-[0_0_12px_rgb(255_255_255/0.1)]
                         active:opacity-40"
+            onClick={handleClick}
         >
             <div className="flex items-center">
                 <span className="block w-[5px] h-[42px] rounded-r-[5px] bg-gray transition-all duration-300 group-hover:bg-accent-light" />
