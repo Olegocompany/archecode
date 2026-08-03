@@ -1,11 +1,15 @@
 export { default as Avatar } from './Avatar';
 export { default as Bell } from './Bell';
 export { default as Cancel } from './Cancel';
+export { default as CheckMark } from './CheckMark';
 export { default as CloseEye } from './CloseEye';
+export { default as CloudDownload } from './CloudDownload';
 export { default as Cross } from './Cross';
 export { default as Exit } from './Exit';
 export { default as Lock } from './Lock';
+export { default as Message } from './Message';
 export { default as OpenEye } from './OpenEye';
+export { default as People } from './People';
 export { default as Plus } from './Plus';
 export { default as Save } from './Save';
 export { default as Trashcan } from './Trashcan';
