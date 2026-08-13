@@ -86,7 +86,7 @@ export default function Widget() {
   }, []);
 
   return (
-    <div className="flex w-full h-fullbg-white relative overflow-hidden rounded-[40px]">
+    <div className="flex h-fullbg-white relative overflow-hidden rounded-[40px]">
       <div
         className="w-full flex"
         ref={elementBlockPicture}
