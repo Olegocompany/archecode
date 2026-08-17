@@ -4,6 +4,8 @@ volumes:
 networks:
   databased:
     driver: bridge
+  filesystem:
+    driver: bridge
 
 services:
   database:
@@ -30,5 +32,20 @@ services:
       - database
     networks:
       - databased
+      - filesystem
     ports:
       - "8080:8080"
+  
+  filecloud:
+    image: minio
+    container_name: archecode-minio
+    environment:
+      MINIO_ROOT_USER=admin
+      MINIO_ROOT_PASSWORD=password
+    volumes:
+      - ./data/minio:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - filesystem
