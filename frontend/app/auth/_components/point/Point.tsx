@@ -20,6 +20,7 @@ export default function Point({ point, progress }: PointProps) {
           r="7"
           style={{
             fill: point ? " var(--accent-base) " : "var(--white) ",
+            opacity: point ? 1 : 0.5,
           }}
         />
 

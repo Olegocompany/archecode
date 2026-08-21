@@ -92,9 +92,9 @@ export default function Widget() {
   }, []);
 
   return (
-    <div className="flex w-full h-full bg-white relative overflow-hidden rounded-[40px]">
+    <div className="flex w-full h-full bg-none relative overflow-hidden rounded-[40px]">
       <div
-        className="w-full flex "
+        className="w-full flex relative"
         ref={elementBlockPicture}
         style={{
           transform: `translateX(-${100 * currentPicture}%) `,
@@ -117,7 +117,7 @@ export default function Widget() {
         <div className="text-center flex flex-col gap-1">
           <p
             className={
-              "text-[32px] text-white transition duration-300 " +
+              "text-[32px] text-white transition duration-300 font-jost " +
               styles.widgetText
             }
           >
@@ -125,7 +125,7 @@ export default function Widget() {
           </p>
           <p
             className={
-              "text-[18px] text-white/70 transition duration-300 " +
+              "text-[18px] text-white/70 transition duration-300 font-montserrat " +
               styles.widgetText
             }
           >

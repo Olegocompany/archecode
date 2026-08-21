@@ -20,7 +20,7 @@ export default function Login() {
           </Button>
           <div className="flex items-center gap-[5px]">
             <p className="text-white font-montserrat font-normal text-[18px]">
-              У вас есть аккаунт?
+              Впервые на платформе?
             </p>
             <div className="text-[18px]">
               <Link href="/auth/register">Зарегистрироваться</Link>
