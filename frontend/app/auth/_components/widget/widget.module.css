@@ -1,39 +1,37 @@
-
 .widget::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    opacity: 80%;
-    bottom: 0;
-    border-radius: 40px;
-    background-image: linear-gradient(0, var(--dark-gray) 21%, transparent 81%);
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  opacity: 80%;
+  bottom: 0;
+  background-image: linear-gradient(0, var(--dark-gray) 21%, transparent 81%);
 }
 
 .widgetText {
-    animation: text 3000ms ease infinite;
+  animation: text 3000ms ease infinite;
 }
 
 @keyframes text {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    5% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    90% {
-        opacity: 0.8;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  5% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
 }

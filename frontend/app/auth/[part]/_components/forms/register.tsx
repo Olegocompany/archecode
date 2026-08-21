@@ -1,9 +1,10 @@
 "use client";
-import { Input, Button, Link } from "@shared-ui";
+import { Input, Button } from "@shared-ui";
+import Link from "next/link";
 
 export default function Register() {
   return (
-    <div className="flex flex-col gap-[40px] pr-[122px] pl-[100px] pt-[140px] pb-[40px]">
+    <div className="flex flex-col gap-[40px] px-[80px] justify-center">
       <h2 className="text-[60px] text-white font-jost font-semibold text-center">
         Создание аккаунта
       </h2>
@@ -27,7 +28,7 @@ export default function Register() {
               У вас есть аккаунт?
             </p>
             <div className="text-[18px]">
-              <Link to="/auth/login">Войти</Link>
+              <Link href="/auth/login">Войти</Link>
             </div>
           </div>
         </div>

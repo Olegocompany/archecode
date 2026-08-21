@@ -1,5 +1,11 @@
 "use client";
-import { useEffect, useEffectEvent, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useEffectEvent,
+  useRef,
+  useState,
+} from "react";
 import { Point } from "@/app/auth";
 import styles from "./widget.module.css";
 
@@ -62,19 +68,19 @@ export default function Widget() {
 
   const changeProgressAdapter = useEffectEvent(changeProgress);
 
-  const time = () => {
+  const time = useCallback(() => {
     if (currentPicture === 3) {
       setOnAnimation(false);
       setCurrentPicture(0);
     }
-  };
+  }, [currentPicture]);
 
   useEffect(() => {
     const pictureInterval = setInterval(time, 500);
     return () => {
       clearInterval(pictureInterval);
     };
-  }, [currentPicture]);
+  }, [time]);
 
   useEffect(() => {
     const progressInterval = setInterval(changeProgressAdapter, 50);
@@ -86,19 +92,19 @@ export default function Widget() {
   }, []);
 
   return (
-    <div className="flex h-fullbg-white relative overflow-hidden rounded-[40px]">
+    <div className="flex w-full h-full bg-white relative overflow-hidden rounded-[40px]">
       <div
-        className="w-full flex"
+        className="w-full flex "
         ref={elementBlockPicture}
         style={{
-          transform: `translateX(-${100 * currentPicture}%)`,
+          transform: `translateX(-${100 * currentPicture}%) `,
           transition: onAnimation ? "all 0.3s linear" : "none",
         }}
       >
         {listPicture.map((item, i) => (
           <div
             className={
-              "shrink-0 widget w-full h-full bg-cover bg-center bg-no-repeat rounded-[40px] flex justify-end items-center " +
+              "shrink-0 widget w-full h-full bg-cover bg-center bg-no-repeat rounded-[40px] flex justify-end items-center overflow-hidden " +
               styles.widget
             }
             style={{ backgroundImage: `url(${item})` }}
