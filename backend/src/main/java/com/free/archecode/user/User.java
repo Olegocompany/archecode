@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"email"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"})
 )
 @ToString(exclude = {"role", "projects"})
 public class User {
@@ -18,13 +18,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Identity указываем, чтобы работало как автоинкремент
     private Long id;
-
+    
+    @Column(unique = true)
     private String email;
+
+    @Column(unique = true)
     private String username;
     private String password;
 
     private String name;
     private String surname;
+
+    private String imageLink;
 
 
     @ManyToOne(optional = false)
@@ -63,6 +68,8 @@ public class User {
         this.id = id;
     }
 
+    public void setImageLink(String imageLink) { this.imageLink = imageLink; }
+
     // getters
     public String getEmail() {
         return email;
@@ -93,5 +100,7 @@ public class User {
     public List<Project> getProjects() {
         return projects;
     }
+
+    public String getImageLink() { return imageLink; }
 
 }

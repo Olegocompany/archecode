@@ -18,10 +18,10 @@ http:
     type: json
     data: |-
       {
-        "name": "MeOrNot",
+        "name": "sMeOrNot",
         "surname": "Sasalele",
-        "username": "sosatelOnline",
-        "email": "notfound@gmail.com",
+        "username": "soosatelOnline",
+        "email": "notfounds@gmail.com",
         "password": "password",
         "role_name": "user"
       }
