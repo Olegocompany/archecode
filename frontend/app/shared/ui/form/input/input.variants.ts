@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 
 export const inputVariants = tv({
   base:
-    "flex font-montserrat justify-center items-center w-full gap-4 text-white placeholder:font-montserrat placeholder:text-input-placeholder px-5 py-5.5 bg-transparent rounded-2xl border-2 border-input-outline transition duration-300" +
+    "flex font-montserrat justify-center items-center w-full gap-4 text-white placeholder:font-montserrat placeholder:text-input-placeholder px-5 py-5.5 bg-transparent rounded-2xl border-2 border-input-outline transition duration-300 text-lg placeholder:text-lg" +
     " hover:placeholder:text-placeholder-hover hover:bg-white/5 hover:shadow-[0_0_12px_1px_rgba(2,255,11,0.3)]" +
     " active:placeholder:text-placeholder-active active:bg-white/10" +
     " disabled:cursor-not-allowed disabled:pointer-events-none disabled:opacity-50" +
