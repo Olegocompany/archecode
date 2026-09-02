@@ -1,7 +1,13 @@
 import { Trashcan, Lock, CheckMark, People, Message, CloudDownload } from '@/app/shared/svg';
 import { MenuButton, Notification } from '@shared-ui';
+import { memo } from 'react';
 
 interface SwitchProjectsProps {
+    projectData?: ProjectData;
+    handleClick?: () => void;
+}
+
+interface ProjectData {
     name: string;
     description: string;
     update: string | number;
@@ -9,19 +15,9 @@ interface SwitchProjectsProps {
     developers: string | number;
     commits: string | number;
     size: string | number;
-    handleClick?: () => void;
 }
 
-function SwitchProjects({
-    name,
-    description,
-    update,
-    branch,
-    developers,
-    commits,
-    size,
-    handleClick,
-}: SwitchProjectsProps) {
+const ProjectItem = memo(function ProjectItem({ projectData, handleClick }: SwitchProjectsProps) {
     return (
         <div
             className="flex group justify-between bg-input-outline rounded-[30px] font-montserrat drop-shadow-[0_4_10px_rgba(0_0_0/0.05)] w-full transition-all duration-300
@@ -33,8 +29,10 @@ function SwitchProjects({
                 <span className="block w-[5px] h-[42px] rounded-r-[5px] bg-gray transition-all duration-300 group-hover:bg-accent-light" />
                 <div className="flex p-5">
                     <div className="flex flex-col text-white text-2xl gap-2.5">
-                        <p>{name}</p>
-                        <p className="text-base opacity-50 max-w-200 line-clamp-2">{description}</p>
+                        <p>{projectData?.name}</p>
+                        <p className="text-base opacity-50 max-w-200 line-clamp-2">
+                            {projectData?.description}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -45,11 +43,13 @@ function SwitchProjects({
                             <span>
                                 <CheckMark />
                             </span>
-                            <p>Обновлён {update} минуты назад</p>
+                            <p>Обновлён {projectData?.update} минуты назад</p>
                         </div>
                         <div className="flex text-white gap-1 justify-end">
                             <p className=" opacity-30">Отслеживаемая ветка: </p>
-                            <span className=" drop-shadow-[0_0_6px_var(--white)]">{branch}</span>
+                            <span className=" drop-shadow-[0_0_6px_var(--white)]">
+                                {projectData?.branch}
+                            </span>
                         </div>
                     </div>
                     <span className="w-[1px] h-full bg-white/5" />
@@ -59,19 +59,19 @@ function SwitchProjects({
                                 <span>
                                     <People />
                                 </span>
-                                <p>{developers}</p>
+                                <p>{projectData?.developers}</p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <span>
                                     <Message />
                                 </span>
-                                <p>{commits}</p>
+                                <p>{projectData?.commits}</p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <span>
                                     <CloudDownload />
                                 </span>
-                                <p className="whitespace-nowrap">{size}</p>
+                                <p className="whitespace-nowrap">{projectData?.size}</p>
                             </div>
                         </div>
                         <div className="relative flex flex-col h-full justify-between">
@@ -90,6 +90,6 @@ function SwitchProjects({
             </div>
         </div>
     );
-}
+});
 
-export default SwitchProjects;
+export default ProjectItem;
