@@ -10,27 +10,47 @@
 }
 
 .widgetText {
-  animation: text 3000ms ease infinite;
+  /*animation: textSwap 3000ms ease infinite;*/
 }
 
-@keyframes text {
+.widgetTitle {
+  transition: 0.5s all;
+  animation: textSwap 0.5s forwards;
+  animation-delay: 2.5s;
+}
+
+@starting-style {
+  .widgetTitle {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes textSwap {
   0% {
+  }
+  100% {
     opacity: 0;
     transform: translateY(20px);
   }
-  5% {
+}
+@keyframes textIn {
+  from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
-  50% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
-  90% {
-    opacity: 0.8;
+}
+
+@keyframes textOut {
+  from {
+    opacity: 1;
     transform: translateY(0);
   }
-  100% {
+  to {
     opacity: 0;
     transform: translateY(-20px);
   }

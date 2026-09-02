@@ -14,8 +14,10 @@ export default function Widget() {
   const [positionPoint, setPositionPoint] = useState(0);
   const elementPicture = useRef<HTMLDivElement>(null);
   const elementBlockPicture = useRef<HTMLDivElement>(null);
+  const elementTextSwap = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(1);
   const [onAnimation, setOnAnimation] = useState(true);
+
   const listPicture = [
     "/images/widget/photo-one.png",
     "/images/widget/photo-two.png",
@@ -92,7 +94,7 @@ export default function Widget() {
   }, []);
 
   return (
-    <div className="flex w-full h-full bg-none relative overflow-hidden rounded-[40px]">
+    <div className="flex w-full h-full bg-none relative overflow-hidden rounded-[40px] ">
       <div
         className="w-full flex relative"
         ref={elementBlockPicture}
@@ -114,7 +116,11 @@ export default function Widget() {
         ))}
       </div>
       <div className="absolute h-full flex w-full bottom-0 items-center justify-end py-[40px] flex-col gap-[34px]">
-        <div className="text-center flex flex-col gap-1">
+        <div
+          key={positionPoint}
+          className={"text-center flex flex-col gap-1 " + styles.widgetTitle}
+          ref={elementTextSwap}
+        >
           <p
             className={
               "text-[32px] text-white transition duration-300 font-jost " +
