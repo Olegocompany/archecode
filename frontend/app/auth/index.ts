@@ -1,2 +1,1 @@
-export * from "./_components";
-export * from "./[part]";
+export * from './[part]';

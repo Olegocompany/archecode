@@ -23,13 +23,12 @@
 }
 
 @keyframes textSwap {
-    0% {
-    }
-    100% {
+    to {
         opacity: 0;
         transform: translateY(20px);
     }
 }
+
 @keyframes textIn {
     from {
         opacity: 0;
