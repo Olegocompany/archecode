@@ -1,2 +1,2 @@
-export * from './point'
-export * from './widget'
+export * from './point';
+export * from './widget';

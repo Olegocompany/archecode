@@ -1,25 +1,28 @@
-debug: ${DEBUG_ENABLED:false}
+debug: ${DEBUG_ENABLED}
 spring:
-    application:
-        name: archecode
-    flyway:
-        enabled: true
-    jpa:
-        generate-ddl: false
-        hibernate:
-            ddl-auto: validate
-    main:
-        allow-bean-definition-overriding: true
-    datasource:
-      url: ${DATABASE_URL}
-      username: ${DB_USER}
-      password: ${DB_PASSWORD}
+  application:
+    name: archecode
+  flyway:
+    enabled: true
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: ${DEBUG_ENABLED}
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  config:
+    import: optional:file:.env[.properties]
 
 server:
   port: ${SERVER_PORT:8080}
 
 jwt:
-    secret: ${JWT_SECRET}
-    expiration: ${JWT_EXPIRATION:900000}
-    refresh:
-      expiration: ${REFRESH_EXPIRATION:259200000}
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION}
+  refresh:
+    expiration: ${REFRESH_EXPIRATION}
