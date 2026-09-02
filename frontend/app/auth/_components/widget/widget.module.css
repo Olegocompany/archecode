@@ -9,10 +9,6 @@
   background-image: linear-gradient(0, var(--dark-gray) 21%, transparent 81%);
 }
 
-.widgetText {
-  /*animation: textSwap 3000ms ease infinite;*/
-}
-
 .widgetTitle {
   transition: 0.5s all;
   animation: textSwap 0.5s forwards;
