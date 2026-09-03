@@ -1,5 +1,6 @@
 export { default as Avatar } from './Avatar';
 export { default as Cancel } from './Cancel';
+export { default as CheckMark } from './CheckMark';
 export { default as CloseEye } from './CloseEye';
 export { default as Cross } from './Cross';
 export { default as Edit } from './Edit';
