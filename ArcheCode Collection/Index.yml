@@ -6,9 +6,7 @@ info:
 http:
   method: GET
   url: "{{host}}/"
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZWNPbmUyQGpqYWFhLmFhYSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTc4NDQ1MzYxMiwiZXhwIjoxNzg0NDU0NTEyfQ.UTx4Rm6TfPRP9PkR1dQmilLjbQavBLUN5LpSIr_sI1c
+  auth: inherit
 
 settings:
   encodeUrl: true

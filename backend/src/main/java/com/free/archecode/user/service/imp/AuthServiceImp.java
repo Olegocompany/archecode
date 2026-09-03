@@ -2,6 +2,7 @@ package com.free.archecode.user.service.imp;
 
 import com.free.archecode.role.RoleRepository;
 import com.free.archecode.shared.common.exceptions.InvalidRoleException;
+import com.free.archecode.shared.config.security.user.UserAuthDetails;
 import com.free.archecode.shared.config.security.user.imps.UserAuthDetailsImp;
 import com.free.archecode.shared.security.token.jwt.JwtService;
 import com.free.archecode.shared.security.token.refreshToken.RefreshTokenService;
@@ -74,7 +75,7 @@ public class AuthServiceImp implements AuthService {
      * @return pair jwtToken + refreshToken
      */
     public ContainerAuthDtoResponse refreshToken(String refreshToken) {
-        UserAuthDetailsImp user = refreshTokenService.getUserByToken(refreshToken);
+        UserAuthDetails user = refreshTokenService.getUserByToken(refreshToken);
         if (user == null) {
             throw new BadCredentialsException("Invalid token");
         }
@@ -95,7 +96,7 @@ public class AuthServiceImp implements AuthService {
      * @param user
      * @return ContainerAuthResponse (jwtToken, refreshToken)
      */
-    private ContainerAuthDtoResponse generateTokenPair(UserAuthDetailsImp user) {
+    private ContainerAuthDtoResponse generateTokenPair(UserAuthDetails user) {
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = refreshTokenService.generateToken(user);
 

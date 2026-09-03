@@ -6,6 +6,7 @@ import com.free.archecode.user.dto.auth.request.RegisterUserDtoRequest;
 import com.free.archecode.user.dto.auth.response.AuthDtoResponse;
 import com.free.archecode.user.dto.auth.response.ContainerAuthDtoResponse;
 import com.free.archecode.user.service.AuthService;
+import com.free.archecode.utils.user.UserAuthUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -22,7 +23,7 @@ public class AuthController {
     private final AuthService authService;
     private final UserMapper userMapper;
 
-    private final static String cookieName = "rtoken";
+    private static final String COOKIENAME = "rtoken";
 
     @Value("${jwt.refresh.expiration}")
     private long expiration;
@@ -54,21 +55,20 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(
-            @CookieValue(name = cookieName, required = true, defaultValue = "") String refreshToken,
+            @CookieValue(name = COOKIENAME, required = true, defaultValue = "") String refreshToken,
             HttpServletRequest  httpServletRequest,
             HttpServletResponse httpServletResponse
             ) {
         if (refreshToken == null) {
             return ResponseEntity.badRequest().build();
         }
-        System.out.println(refreshToken);
         ContainerAuthDtoResponse containerAuthDtoResponse = authService.refreshToken(refreshToken);
         setTokenToCookie(httpServletResponse, containerAuthDtoResponse.refreshToken());
         return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken()));
     }
 
     private void setTokenToCookie(HttpServletResponse httpServletResponse, String token) {
-        ResponseCookie cookie = ResponseCookie.from(cookieName, token)
+        ResponseCookie cookie = ResponseCookie.from(COOKIENAME, token)
             .httpOnly(true)
             .secure(true)
             .maxAge(expiration/1000)

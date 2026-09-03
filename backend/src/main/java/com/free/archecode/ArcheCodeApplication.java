@@ -8,5 +8,4 @@ public class ArcheCodeApplication {
     static void main(String[] args) {
         SpringApplication.run(ArcheCodeApplication.class, args);
     }
-
 }

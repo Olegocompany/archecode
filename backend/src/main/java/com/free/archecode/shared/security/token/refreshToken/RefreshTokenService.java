@@ -1,9 +1,9 @@
 package com.free.archecode.shared.security.token.refreshToken;
 
-import com.free.archecode.shared.config.security.user.imps.UserAuthDetailsImp;
+import com.free.archecode.shared.config.security.user.UserAuthDetails;
 import org.hibernate.service.spi.ServiceException;
 
 public interface RefreshTokenService {
-    public String generateToken(UserAuthDetailsImp userDetails) throws ServiceException;
-    public UserAuthDetailsImp getUserByToken(String token);
+    public String generateToken(UserAuthDetails userDetails) throws ServiceException;
+    public UserAuthDetails getUserByToken(String token);
 }
