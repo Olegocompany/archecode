@@ -1,11 +1,12 @@
 import { CloseEye, OpenEye } from '@/app/shared/svg';
+import { memo } from 'react';
 
 interface EyeProps {
     state?: boolean;
     handleClick?: () => void;
 }
 
-function Eye({ handleClick, state = true }: EyeProps) {
+const Eye = memo(function Eye({ handleClick, state = true }: EyeProps) {
     return (
         <>
             {state ? (
@@ -21,6 +22,6 @@ function Eye({ handleClick, state = true }: EyeProps) {
             )}
         </>
     );
-}
+});
 
 export default Eye;
