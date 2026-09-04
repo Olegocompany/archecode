@@ -1,5 +1,5 @@
 'use client';
-import { memo, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Cancel, CheckMark, Edit, Save } from '@/app/shared/svg';
 import { MenuButton } from '@shared-ui';
 
@@ -18,7 +18,8 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
         setIsEdit(!isEdit);
     };
 
-    async function editName() {
+    async function editName(e: React.SubmitEvent) {
+        e.preventDefault();
         setIsLoad(false);
         setStatus('resolve');
         if (status === 'resolve') {
@@ -36,7 +37,7 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
     return (
         <div className={'transition-all duration-300 font-montserrat text-2xl text-white'}>
             {isEdit ? (
-                <form className={'flex gap-2.5 items-center'}>
+                <form onSubmit={editName} className={'flex gap-2.5 items-center'}>
                     {isLoad ? (
                         <p className={'text-orange-600'}>Загрузка</p>
                     ) : (
