@@ -26,7 +26,6 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
         } else if (status === 'reject') {
             setNewName(name);
         }
-        console.log(newName);
         setTimeout(() => {
             setStatus('wait');
             handleIsEdit();
