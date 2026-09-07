@@ -1,14 +1,18 @@
+'use client';
 import { ReactNode, memo } from 'react';
 import { MenuButton } from '../menu-button';
 import { Cross } from '../../svg';
+import { useRouter } from 'next/router';
 
 interface ModalProps {
     title?: string;
     children?: ReactNode;
-    handleClose: () => void;
 }
 
-const Modal = memo(function Modal({ title, children, handleClose }: ModalProps) {
+const Modal = memo(function Modal({ title, children }: ModalProps) {
+    const router = useRouter();
+    const handleClose = () => router.back();
+
     return (
         <div className="absolute inset-0 flex items-center justify-center">
             <div className="absolute inset-0 bg-black/70"></div>
