@@ -3,11 +3,11 @@ import { default as Hyperlink } from 'next/link';
 
 interface LinkProps {
     to: string;
-    size: number;
+    size?: number;
     children: ReactNode;
 }
 
-function Link({ to, children, size }: LinkProps) {
+function Link({ to, children, size = 16 }: LinkProps) {
     return (
         <Hyperlink
             className={
@@ -16,7 +16,7 @@ function Link({ to, children, size }: LinkProps) {
                 'active:text-accent-dark active:[text-shadow:0_0_6px_rgba(0,185,6,0.5)] '
             }
             href={to}
-            style={{ fontSize: size ?? 16 }}
+            style={{ fontSize: size }}
         >
             {children}
         </Hyperlink>

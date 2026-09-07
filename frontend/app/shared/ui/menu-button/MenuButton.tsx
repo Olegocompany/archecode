@@ -1,15 +1,23 @@
 'use client';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 interface MenuButtonProps {
     variant: 'default' | 'grow' | 'icon';
     handleClick?: () => void;
     text?: string;
-    children?: string;
+    children?: ReactNode;
     bgColor?: 'green' | 'red' | 'gray';
+    className?: string;
 }
 
-function MenuButton({ handleClick, variant, children, text, bgColor = 'gray' }: MenuButtonProps) {
+function MenuButton({
+    handleClick,
+    variant,
+    children,
+    text,
+    bgColor = 'gray',
+    className,
+}: MenuButtonProps) {
     const [isHover, setIsHover] = useState(false);
 
     const setColor = (color: string) => {
@@ -20,7 +28,7 @@ function MenuButton({ handleClick, variant, children, text, bgColor = 'gray' }: 
     };
 
     return (
-        <div className="cursor-pointer font-montserrat" onClick={handleClick}>
+        <div className={'cursor-pointer font-montserrat ' + className} onClick={handleClick}>
             {variant === 'icon' ? (
                 <div className={`rounded-[10px] p-2 ${setColor(bgColor)}`}>{children}</div>
             ) : variant === 'grow' ? (
@@ -32,7 +40,7 @@ function MenuButton({ handleClick, variant, children, text, bgColor = 'gray' }: 
                     onMouseLeave={() => setIsHover(false)}
                 >
                     <div
-                        className={` transition-all duration-200 
+                        className={` transition-all duration-200
                         ${isHover ? ' drop-shadow-[0_0_6px_var(--error)]' : 'drop-shadow-[0_0_6px_var(--white)]'}`}
                     >
                         {children}
