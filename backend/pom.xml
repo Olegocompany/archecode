@@ -134,7 +134,6 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.22.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -153,6 +152,12 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>s3</artifactId>
             <version>2.53.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <!-- <version>1.6.3</version> there is version 1.5.34 definided by Spring -->
             <scope>compile</scope>
         </dependency>
     </dependencies>
