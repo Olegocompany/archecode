@@ -1,5 +1,5 @@
 'use client';
-import React, { memo, useState } from 'react';
+import { SubmitEvent, memo, useState, useRef } from 'react';
 import { Cancel, CheckMark, Edit, Save } from '@/app/shared/svg';
 import { MenuButton } from '@shared-ui';
 
@@ -8,18 +8,24 @@ interface EditFieldProps {
     handleClick?: () => void;
 }
 
+interface RequestStatus {
+    status: 'wait' | 'reject' | 'resolve';
+}
+
 const EditField = memo(function EditField({ name, handleClick }: EditFieldProps) {
     const [isEdit, setIsEdit] = useState(false);
     const [isLoad, setIsLoad] = useState(false);
-    const [status, setStatus] = useState('wait');
+    const [status, setStatus] = useState<RequestStatus['status']>('wait');
     const [newName, setNewName] = useState(name);
+    const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const handleIsEdit = () => {
+    const handleEdit = () => {
         setIsEdit(!isEdit);
     };
 
-    async function editName(e: React.SubmitEvent) {
+    async function handleSubmit(e: SubmitEvent) {
         e.preventDefault();
+        e.stopPropagation();
         setIsLoad(false);
         setStatus('resolve');
         if (status === 'resolve') {
@@ -27,9 +33,14 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
         } else if (status === 'reject') {
             setNewName(name);
         }
-        setTimeout(() => {
+
+        if (timer.current) {
+            clearTimeout(timer.current);
+        }
+
+        timer.current = setTimeout(() => {
             setStatus('wait');
-            handleIsEdit();
+            handleEdit();
             setIsLoad(false);
         }, 500);
     }
@@ -37,7 +48,7 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
     return (
         <div className={'transition-all duration-300 font-montserrat text-2xl text-white'}>
             {isEdit ? (
-                <form onSubmit={editName} className={'flex gap-2.5 items-center'}>
+                <form onSubmit={handleSubmit} className={'flex gap-2.5 items-center'}>
                     {isLoad ? (
                         <p className={'text-orange-600'}>Загрузка</p>
                     ) : (
@@ -62,7 +73,7 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
                         </MenuButton>
                     ) : (
                         <MenuButton variant={'icon'} bgColor={'green'}>
-                            <Save onClick={editName} />
+                            <Save onClick={handleSubmit} />
                         </MenuButton>
                     )}
                 </form>
@@ -70,7 +81,7 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
                 <div className={'flex gap-2.5 items-center'}>
                     <p>{newName}</p>
                     <Edit
-                        onClick={handleIsEdit}
+                        onClick={handleEdit}
                         className={
                             'text-white cursor-pointer transition-all duration-300 ' +
                             'hover:drop-shadow-[0_0_12px_var(--white)] '
