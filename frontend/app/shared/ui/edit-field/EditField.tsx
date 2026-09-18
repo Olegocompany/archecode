@@ -5,14 +5,14 @@ import { MenuButton } from '@shared-ui';
 
 interface EditFieldProps {
     name: string;
-    handleClick?: () => void;
+    onNameChange: (newName: string) => Promise<void>;
 }
 
 interface RequestStatus {
     status: 'wait' | 'reject' | 'resolve';
 }
 
-const EditField = memo(function EditField({ name, handleClick }: EditFieldProps) {
+const EditField = memo(function EditField({ name, onNameChange }: EditFieldProps) {
     const [isEdit, setIsEdit] = useState(false);
     const [isLoad, setIsLoad] = useState(false);
     const [status, setStatus] = useState<RequestStatus['status']>('wait');
@@ -26,16 +26,18 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
     async function handleSubmit(e: SubmitEvent) {
         e.preventDefault();
         e.stopPropagation();
-        setIsLoad(false);
-        setStatus('resolve');
-        if (status === 'resolve') {
-            setNewName(newName);
-        } else if (status === 'reject') {
-            setNewName(name);
-        }
 
         if (timer.current) {
             clearTimeout(timer.current);
+        }
+
+        try {
+            await onNameChange(newName);
+            setNewName(newName);
+            setStatus('resolve');
+        } catch {
+            setNewName(name);
+            setStatus('reject');
         }
 
         timer.current = setTimeout(() => {
@@ -79,7 +81,7 @@ const EditField = memo(function EditField({ name, handleClick }: EditFieldProps)
                 </form>
             ) : (
                 <div className={'flex gap-2.5 items-center'}>
-                    <p>{newName}</p>
+                    <p>{name}</p>
                     <Edit
                         onClick={handleEdit}
                         className={
