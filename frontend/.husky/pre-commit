@@ -1,7 +1,11 @@
 #!/bin/sh
 cd frontend
+echo
 echo "<~~~~~~ PRE-COMMIT LINTING VIA HUSKY ~~~~~~>"
+echo
 npx lint-staged
 EXIT_CODE=$?
+echo
 echo "<~~~~~~ PRE-COMMIT LINTING DONE ~~~~~~>"
+echo
 exit $EXIT_CODE
