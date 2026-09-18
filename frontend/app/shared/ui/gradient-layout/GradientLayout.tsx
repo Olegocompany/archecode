@@ -1,23 +1,18 @@
-function GradientLayout() {
+import styles from './GradientLayout.module.css';
+
+export function GradientLayout() {
     return (
-        <div className={'relative h-screen w-screen bg-dark-gray overflow-hidden'}>
-            <div className={'bg-[linear-gradient(180deg,#00ffe1_0%,rgba(37,239,37,0)_100%)] '}>
-                <span
-                    className={
-                        'absolute opacity-80 w-89 h-89 left-1/5 -top-1/6 rounded-full bg-[linear-gradient(180deg,#00ffe1_0%,rgba(37,239,37,0)_100%)] blur-[400px]'
-                    }
-                />
-                <span
-                    className={
-                        'absolute opacity-80 w-220 h-220 left-1/10 top-4/7 rounded-full bg-[linear-gradient(180deg,#00ffe1_0%,rgba(37,239,37,0)_100%)] blur-[140px]'
-                    }
-                />
-                <span
-                    className={
-                        'absolute opacity-80 w-181 h-181 left-2/3 -top-1/7 rounded-full bg-[linear-gradient(180deg,#00ffe1_0%,rgba(37,239,37,0)_100%)] blur-[300px]'
-                    }
-                />
-            </div>
+        <div className="relative min-h-screen w-full overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950" />
+            <span
+                className={` absolute opacity-80 w-[20%] h-[30%] left-89 -top-35 rounded-full blur-[320px]  ${styles.gradient}`}
+            />
+            <span
+                className={` absolute opacity-80 w-[40%] h-[65%] left-60 top-170 rounded-full blur-[140px] ${styles.circleOne} ${styles.gradient}`}
+            />
+            <span
+                className={`absolute opacity-80 w-[35%] h-[65%] -right-50 -top-40 rounded-full blur-[300px] ${styles.circle} ${styles.gradient}`}
+            />
         </div>
     );
 }
