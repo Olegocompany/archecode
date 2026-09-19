@@ -25,7 +25,7 @@ export default function Error({ error, retry }: errorData) {
                     Попробовать ещё раз
                 </Button>
                 <div className={'w-full'}>
-                    <Link to={'/oleg'}>
+                    <Link to={'/'}>
                         <Button variantButton={'solid'}>На главную</Button>
                     </Link>
                 </div>
