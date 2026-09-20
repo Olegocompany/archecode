@@ -1,8 +1,6 @@
 package com.free.archecode.shared.config.security;
 
-import com.free.archecode.shared.security.token.jwt.JwtFilter;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,18 +15,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.free.archecode.shared.security.token.jwt.JwtFilter;
+
+import jakarta.servlet.http.HttpServletResponse;
+
 @SuppressWarnings("RedundantThrows")
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
     private final ContentTypeFilter contentTypeFilter;
 
+    @Autowired
+    public SecurityConfig(UserDetailsService userDetailsService, JwtFilter jwtFilter,
+            ContentTypeFilter contentTypeFilter) {
+        this.contentTypeFilter = contentTypeFilter;
+        this.userDetailsService = userDetailsService;
+        this.jwtFilter = jwtFilter;
+    }
+
     /*
-    Перенастройка Spring Security на "api" режим: вывод json ответов, отключение его сессий
+     * Перенастройка Spring Security на "api" режим: вывод json ответов, отключение
+     * его сессий
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -37,13 +47,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login", "/auth/register", "/auth/refresh", "/public/**").permitAll()
-                        .anyRequest().authenticated()
-                ) // разрешить какие публичные (для всех) и для входа с регистрацией
+                        .anyRequest().authenticated()) // разрешить какие публичные (для всех) и для входа с
+                                                       // регистрацией
 
-        // Переопределение формата выдаваемых ошибок защиты
+                // Переопределение формата выдаваемых ошибок защиты
                 .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint((req, resp, e) -> {
-                            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED); //401
+                            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
                             resp.setContentType("application/json");
                             resp.getWriter().write("{\"error\": \"Unauthorized\"}");
                         })
@@ -51,16 +61,15 @@ public class SecurityConfig {
                             resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
                             resp.setContentType("application/json");
                             resp.getWriter().write("{\"error\": \"Access Denied\"}");
-                        })
-                )
-                    // No sessions
-                .sessionManagement(sessionManagement ->  sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                        }))
+                // No sessions
+                .sessionManagement(sessionManagement -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 /*
-                По идее логика такова:
-                сначала запрос идет в JwtFilter, там идет проверка JWT токена и в случае аутентифицируется.
-                При аутентификации создается объект Authentication (то есть аутентифицирован)
+                 * По идее логика такова:
+                 * сначала запрос идет в JwtFilter, там идет проверка JWT токена и в случае
+                 * аутентифицируется.
+                 * При аутентификации создается объект Authentication (то есть аутентифицирован)
                  */
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // фильтр перед проверкой
                 .addFilterBefore(contentTypeFilter, JwtFilter.class); // проверка что запрос только про API
@@ -72,7 +81,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @Bean
     AuthenticationProvider authenticationProvider() {
