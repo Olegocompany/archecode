@@ -1,9 +1,8 @@
 package com.free.archecode.shared.config;
 
-import com.free.archecode.shared.common.exceptions.InvalidRoleException;
-import com.free.archecode.shared.common.exceptions.NotFoundException;
-import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;
-import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +15,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestCookieException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.free.archecode.shared.common.exceptions.InvalidRoleException;
+import com.free.archecode.shared.common.exceptions.NotFoundException;
+import com.free.archecode.shared.common.exceptions.project.CantFindGitProjectException;
+import com.free.archecode.shared.common.exceptions.project.UserHasTooManyProjects;
 
 /*
 Так как ошибки о всяческой валидации и прочее не обрабатываются, нужно самостоятельно
@@ -54,7 +56,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleNoResourceFound(NoResourceFoundException ex) {
         return ResponseEntity.notFound().build();
     }
-
+    
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNoResourceFound(NoHandlerFoundException ex) {
+        return ResponseEntity.notFound().build();
+    }
+        
     // 404
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Map<String, String>> handleNotFound(NotFoundException ex) {

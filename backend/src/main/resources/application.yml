@@ -1,4 +1,4 @@
-debug: ${DEBUG_ENABLED}
+debug: ${DEBUG_ENABLED:false}
 spring:
   application:
     name: archecode
@@ -8,7 +8,7 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: validate
-    show-sql: ${DEBUG_ENABLED}
+    show-sql: ${DEBUG_ENABLED:false}
   main:
     allow-bean-definition-overriding: true
   datasource:
@@ -20,9 +20,18 @@ spring:
 
 server:
   port: ${SERVER_PORT:8080}
+  servlet:
+    contextPath: ${CONTEXT_PATH:/api}
+    context-path: ${CONTEXT_PATH:/api}
 
 jwt:
   secret: ${JWT_SECRET}
-  expiration: ${JWT_EXPIRATION}
+  expiration: ${JWT_EXPIRATION:900000}
   refresh:
-    expiration: ${REFRESH_EXPIRATION}
+    expiration: ${REFRESH_EXPIRATION:900000}
+
+filesystem:
+  endpoint: ${S3_ENDPOINT}
+  accessKey: ${S3_ACCESSKEY}
+  secretKey: ${S3_SECRETKEY}
+  bucket-usersAvatars: ${S3_BUCKET_IMAGES:avatars}
