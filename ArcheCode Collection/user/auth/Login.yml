@@ -10,7 +10,7 @@ http:
     type: json
     data: |-
       {
-        "credential": "secOne2@jjaaa.aaa",
+        "credential": "soosatelOnline",
         "password": "password"
       }
   auth: inherit

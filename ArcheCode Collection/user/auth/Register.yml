@@ -10,10 +10,6 @@ http:
     - name: Content-Type
       value: application/
       disabled: true
-  params:
-    - name: ""
-      value: ""
-      type: query
   body:
     type: json
     data: |-
@@ -30,7 +26,7 @@ http:
 runtime:
   variables:
     - name: host
-      value: http://127.0.0.1:8080
+      value: http://127.0.0.1:8080/api
 
 settings:
   encodeUrl: true

@@ -6,7 +6,6 @@ import com.free.archecode.user.dto.auth.request.RegisterUserDtoRequest;
 import com.free.archecode.user.dto.auth.response.AuthDtoResponse;
 import com.free.archecode.user.dto.auth.response.ContainerAuthDtoResponse;
 import com.free.archecode.user.service.AuthService;
-import com.free.archecode.utils.user.UserAuthUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -35,47 +34,76 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthDtoResponse> register(
-            @RequestBody @Valid RegisterUserDtoRequest request,
-            HttpServletResponse httpServletResponse
+        @RequestBody @Valid RegisterUserDtoRequest request,
+        HttpServletResponse httpServletResponse
     ) {
-        ContainerAuthDtoResponse containerAuthDtoResponse = authService.register(request);
-        setTokenToCookie(httpServletResponse, containerAuthDtoResponse.refreshToken());
-        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken()));
+        ContainerAuthDtoResponse containerAuthDtoResponse =
+            authService.register(request);
+        setTokenToCookie(
+            httpServletResponse,
+            containerAuthDtoResponse.refreshToken()
+        );
+        return ResponseEntity.ok(
+            userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken())
+        );
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthDtoResponse> login(
-            @RequestBody @Valid LoginUserDtoRequest request,
-            HttpServletResponse httpServletResponse
+        @RequestBody @Valid LoginUserDtoRequest request,
+        HttpServletResponse httpServletResponse
     ) {
-        ContainerAuthDtoResponse containerAuthDtoResponse = authService.login(request);
-        setTokenToCookie(httpServletResponse, containerAuthDtoResponse.refreshToken());
-        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken()));
+        ContainerAuthDtoResponse containerAuthDtoResponse = authService.login(
+            request
+        );
+        setTokenToCookie(
+            httpServletResponse,
+            containerAuthDtoResponse.refreshToken()
+        );
+        return ResponseEntity.ok(
+            userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken())
+        );
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(
-            @CookieValue(name = COOKIENAME, required = true, defaultValue = "") String refreshToken,
-            HttpServletRequest  httpServletRequest,
-            HttpServletResponse httpServletResponse
-            ) {
+        @CookieValue(
+            name = COOKIENAME,
+            required = true,
+            defaultValue = ""
+        ) String refreshToken,
+        HttpServletRequest httpServletRequest,
+        HttpServletResponse httpServletResponse
+    ) {
         if (refreshToken == null) {
             return ResponseEntity.badRequest().build();
         }
-        ContainerAuthDtoResponse containerAuthDtoResponse = authService.refreshToken(refreshToken);
-        setTokenToCookie(httpServletResponse, containerAuthDtoResponse.refreshToken());
-        return ResponseEntity.ok(userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken()));
+        ContainerAuthDtoResponse containerAuthDtoResponse =
+            authService.refreshToken(refreshToken);
+        setTokenToCookie(
+            httpServletResponse,
+            containerAuthDtoResponse.refreshToken()
+        );
+        return ResponseEntity.ok(
+            userMapper.toAuthResponse(containerAuthDtoResponse.jwtToken())
+        );
     }
 
-    private void setTokenToCookie(HttpServletResponse httpServletResponse, String token) {
+    private void setTokenToCookie(
+        HttpServletResponse httpServletResponse,
+        String token
+    ) {
         ResponseCookie cookie = ResponseCookie.from(COOKIENAME, token)
             .httpOnly(true)
             .secure(true)
-            .maxAge(expiration/1000)
+            .maxAge(expiration / 1000)
             .path("/auth/refresh")
             .sameSite("Strict")
             .build();
 
-        httpServletResponse.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        httpServletResponse.addHeader(
+            HttpHeaders.SET_COOKIE,
+            cookie.toString()
+        );
     }
 }

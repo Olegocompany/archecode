@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.free.archecode.shared.common.ImageTypeUtils;
 import com.free.archecode.shared.security.validators.ImageValidator;
 
 import jakarta.validation.ConstraintValidator;
@@ -13,27 +14,16 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Проверка начальных байтов файла.
- * На основании этих байтов делаем вывод кто есть кто.
- * Также, проверяется 
- * ImageValidatorImp
+ * Реализация валидатора {@link ImageValidator}.
+ * Используется {@link ImageTypeUtils}
  */
 
 @Slf4j
 public class ImageValidatorImp implements ConstraintValidator<ImageValidator, MultipartFile> {
 
-    // биты, с которых идет начало реальных изображений, а не просто проверка расширения
-    private static final Map<String, byte[]> MAGIC_BYTES = Map.of(
-        "jpg",  new byte[]{(byte) 0xFF, (byte) 0xD8, (byte) 0xFF},
-        "jpeg",  new byte[]{(byte) 0xFF, (byte) 0xD8, (byte) 0xFF},
-        "png",  new byte[]{(byte) 0x89, 0x50, 0x4E, 0x47},
-        "webp", new byte[]{0x52, 0x49, 0x46, 0x46} // RIFF header, check offset 8 for "WEBP"
-    );
-
-    private static final byte[] WEBP_SIGNATURE = {0x57, 0x45, 0x42, 0x50}; // WEBP at offset 8
-
     private static final Map<String, String> CONTENT_TYPE_TO_EXT = Map.of(
         "image/jpeg", "jpeg",
+        "image/jpeg", "jpg",
         "image/png", "png",
         "image/webp", "webp"
     );
@@ -55,17 +45,19 @@ public class ImageValidatorImp implements ConstraintValidator<ImageValidator, Mu
             return true;
         }
 
+        // проверка что расширение файла соответствует позволенному
         String filenameExt = extractExtension(file.getOriginalFilename());
         if (filenameExt == null || !Arrays.asList(allowedExtensions).contains(filenameExt)) {
             return fail(context, "File extension '" + filenameExt + "' is not allowed. Allowed: "
                 + String.join(", ", allowedExtensions));
         }
 
+        //
         String magicExt = detectExtension(file);
         if (magicExt == null) {
             return fail(context, "Could not detect image format from file content");
         }
-        if (!magicExt.equals(filenameExt)) {
+        if (!sameFormat(magicExt, filenameExt)) {
             return fail(context, "File content is '" + magicExt + "' but extension says '"
                 + filenameExt + "'");
         }
@@ -75,7 +67,7 @@ public class ImageValidatorImp implements ConstraintValidator<ImageValidator, Mu
         if (contentTypeExt == null) {
             return fail(context, "Missing or unsupported Content-Type: " + contentType);
         }
-        if (!contentTypeExt.equals(filenameExt)) {
+        if (!sameFormat(contentTypeExt, filenameExt)) {
             return fail(context, "Content-Type says '" + contentTypeExt + "' but extension says '"
                 + filenameExt + "'");
         }
@@ -101,46 +93,25 @@ public class ImageValidatorImp implements ConstraintValidator<ImageValidator, Mu
         return false;
     }
 
+    /**
+    * give {@link ImageTypeUtils} first 12 bytes to check extenison
+    * @param file
+    * @return String extension
+ */
     private String detectExtension(MultipartFile file) {
         try {
-            byte[] header = file.getInputStream().readNBytes(12);
-
-            for (Map.Entry<String, byte[]> entry : MAGIC_BYTES.entrySet()) {
-                String ext = entry.getKey();
-                byte[] magic = entry.getValue();
-
-                if (matchesHeader(header, magic)) {
-                    if ("webp".equals(ext)) {
-                        return isWebP(header) ? "webp" : null;
-                    }
-                    return ext;
-                }
-            }
+            return ImageTypeUtils.detectExtension(file.getInputStream().readNBytes(12));
         } catch (IOException e) {
             log.error("Failed to read file header for image validation", e);
         }
         return null;
     }
 
-    private boolean matchesHeader(byte[] header, byte[] magic) {
-        if (header.length < magic.length) {
-            return false;
-        }
-        for (int i = 0; i < magic.length; i++) {
-            if (header[i] != magic[i]) {
-                return false;
-            }
-        }
-        return true;
+    private boolean sameFormat(String a, String b) {
+        return a.equals(b) || (isJpegFamily(a) && isJpegFamily(b));
     }
 
-    private boolean isWebP(byte[] header) {
-        if (header.length < 12) {
-            return false;
-        }
-        return header[8] == WEBP_SIGNATURE[0] &&
-               header[9] == WEBP_SIGNATURE[1] &&
-               header[10] == WEBP_SIGNATURE[2] &&
-               header[11] == WEBP_SIGNATURE[3];
+    private boolean isJpegFamily(String ext) {
+        return "jpg".equals(ext) || "jpeg".equals(ext);
     }
 }

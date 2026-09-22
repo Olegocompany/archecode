@@ -20,7 +20,7 @@ request:
     token: "{{token}}"
   variables:
     - name: host
-      value: http://127.0.0.1:8080
+      value: http://127.0.0.1:8080/api
 bundled: false
 extensions:
   bruno:

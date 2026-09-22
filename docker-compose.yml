@@ -24,28 +24,37 @@ services:
     networks:
       - databased
 
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    depends_on:
-      - database
-    networks:
-      - databased
-      - filesystem
-    ports:
-      - "8080:8080"
-  
+  # backend:
+  #   container_name: archecode-backend
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - database
+  #   networks:
+  #     - databased
+  #     - filesystem
+  #   ports:
+  #     - "8080:8080"
+
   filecloud:
-    image: minio
-    container_name: archecode-minio
+    image: versity/versitygw:v1.8.0
+    container_name: archecode-filecloud
     environment:
-      MINIO_ROOT_USER=admin
-      MINIO_ROOT_PASSWORD=password
+      ROOT_ACCESS_KEY: ${S3_ACCESS_KEY:-s3user}
+      ROOT_SECRET_KEY: ${S3_SECRET_KEY:-s3password}
     volumes:
-      - ./data/minio:/data
+      - ./data/filecloud:/data/s3
+      - ./data/iam:/data/iam
+    command: [
+      "--webui", ":7071",
+      "--cors-allow-origin", "http://127.0.0.1:7071",
+      "--iam-dir", "/data/iam",
+      "posix", "/data/s3"
+    ]
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "7070:7070" #s3
+      - "7071:7071" #ui
+    restart: always
     networks:
       - filesystem

@@ -29,8 +29,6 @@ public class User {
     private String name;
     private String surname;
 
-    private String imageLink;
-
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "role_id")
@@ -38,6 +36,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Project> projects;
+
+    private String imageLink;
     
     // setters
     public void setRole(Role role) {

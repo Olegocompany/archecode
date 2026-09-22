@@ -34,4 +34,6 @@ filesystem:
   endpoint: ${S3_ENDPOINT}
   accessKey: ${S3_ACCESSKEY}
   secretKey: ${S3_SECRETKEY}
-  bucket-usersAvatars: ${S3_BUCKET_USERAVATARS:avatars}
+  avatars:
+    bucket-name: ${S3_BUCKET_USERAVATARS:avatars}
+    prefix: "avatar_"
