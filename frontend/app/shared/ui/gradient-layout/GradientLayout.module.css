@@ -1,0 +1,51 @@
+.gradient {
+    background: linear-gradient(180deg, #00ffe1 0%, rgba(37, 239, 37, 1) 100%);
+}
+
+.circle {
+    animation: animationCircle 12s infinite ease-in-out;
+}
+
+.circleOne {
+    animation: animationCircleOne 12s infinite ease-in-out;
+}
+
+@keyframes animationCircleOne {
+    0% {
+        left: 25%;
+        bottom: 100%;
+    }
+    20% {
+        left: 35%;
+        bottom: 170%;
+    }
+    60% {
+        left: 10%;
+        bottom: 100%;
+        transform: rotate(1.3deg);
+    }
+    80% {
+        left: 35%;
+        bottom: 100%;
+    }
+    100% {
+        left: 25%;
+        bottom: 100%;
+    }
+}
+
+@keyframes animationCircle {
+    0% {
+    }
+    20% {
+        transform: rotate(180deg);
+    }
+    50% {
+        transform: rotate(120deg);
+    }
+    70% {
+        transform: rotate(60deg);
+    }
+    100% {
+    }
+}
