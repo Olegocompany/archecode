@@ -3,8 +3,8 @@ import { MenuButton, Notification } from '@shared-ui';
 import { memo } from 'react';
 
 interface SwitchProjectsProps {
-    projectData?: ProjectData;
-    handleClick?: () => void;
+    projectData: ProjectData;
+    handleClick: () => void;
 }
 
 interface ProjectData {
