@@ -1,6 +1,6 @@
 'use client';
 import { SubmitEvent, memo, useState, useRef } from 'react';
-import { Cancel, CheckMark, Edit, Save } from '@/app/shared/svg';
+import { Cancel, Confirm, Edit, Save } from '@/app/shared/svg';
 import { MenuButton } from '@shared-ui';
 
 interface EditFieldProps {
@@ -67,7 +67,7 @@ const EditField = memo(function EditField({ name, onNameChange }: EditFieldProps
                     )}
                     {status === 'resolve' ? (
                         <MenuButton variant={'icon'} bgColor={'green'}>
-                            <CheckMark />
+                            <Confirm />
                         </MenuButton>
                     ) : status === 'reject' ? (
                         <MenuButton variant={'icon'} bgColor={'red'}>
